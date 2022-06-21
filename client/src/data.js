@@ -1,7 +1,7 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://www.freepik.com/premium-photo/close-up-woman-online-shopping-holding-credit-card_5702750.htm",
+      img: "https://img.freepik.com/free-photo/young-beautiful-blonde-woman-jacket-blue-wall-with-mobile-phone-doing-online-shopping_496169-1447.jpg?t=st=1655809585~exp=1655810185~hmac=694ccd95461e17395bc518054c8e89eae2e716ebc7f9d64f509f475904ac92fd&w=1060",
       title: "SUMMER SALE",
       desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
       bg: "f5fafd",

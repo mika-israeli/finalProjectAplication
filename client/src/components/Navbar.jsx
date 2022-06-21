@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import './Css/Navbar.css'
 
 const Container = styled.div`
   height: 60px;
@@ -65,8 +66,14 @@ const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+  
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
+
+const a_style = {
+  'text-decoration': 'none',
+  
+}
 
 const Navbar = () => {
   const quantity = useSelector(state=>state.cart.quantity)
@@ -81,11 +88,11 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>A TEAM.</Logo>
+          <Logo>MMJBS Team</Logo>
         </Center>
         <Right>
-          <MenuItem><Link to="/register">REGISTER</Link></MenuItem>
-          <MenuItem><Link to="/login">SIGN IN</Link></MenuItem>
+          <MenuItem><Link to="/register" style={a_style}>REGISTER</Link></MenuItem>
+          <MenuItem><Link to="/login" style={a_style}>SIGN IN</Link></MenuItem>
           <Link to="/cart">
           <MenuItem>
             <Badge badgeContent={quantity} color="primary">
