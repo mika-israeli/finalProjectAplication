@@ -10,3 +10,7 @@ pass : AppProj2022
 Mailchimp : 
 user : approjectcolman@gmail.com
 pass : AppProj2022!
+
+mongo atlas credentials : 
+user : jonyxd4@gmail.com
+pass : jony1995

@@ -74,9 +74,12 @@ const Login = () => {
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-  const handleClick = (e) => {
+  const handleClick = async(e) => {
     e.preventDefault();
+    
     login(dispatch, { username, password });
+    
+    
   };
   return (
     <Container>

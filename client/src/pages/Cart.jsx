@@ -163,14 +163,22 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
+
+
+
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
   const history = useHistory();
+  //let [bagSize,setBagSize] = useState(0);
 
   const onToken = (token) => {
     setStripeToken(token);
   };
+
+  /*const onSize = (sum) => {
+    setBagSize(sum);
+  }*/
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -186,6 +194,7 @@ const Cart = () => {
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, history]);
+  
   return (
     <Container>
       <Navbar />
@@ -196,14 +205,14 @@ const Cart = () => {
           <TopButton><Link to="/">CONTINUE SHOPPING</Link></TopButton>
           <TopTexts>
             <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <TopText><Link to="./wishlist">Your Wishlist (0)</Link></TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <TopButton><Link to="./sales">HOT SALES</Link></TopButton>
         </Top>
         <Bottom>
           <Info>
             {cart.products.map((product) => (
-              <Product>
+              <Product key={product._id}>
                 <ProductDetail>
                   <Image src={product.img} />
                   <Details>
