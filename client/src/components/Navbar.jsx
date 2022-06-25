@@ -82,6 +82,7 @@ const Navbar = () => {
     alert("logged out successfully !")
     window.location.reload(false);
   }
+  const user = useSelector((state) => state.user.currentUser);
   const quantity = useSelector(state=>state.cart.quantity)
   return (
     <Container>
@@ -97,9 +98,9 @@ const Navbar = () => {
           <Logo>MMJBS Team</Logo>
         </Center>
         <Right>
-          <MenuItem><Link to="/register" style={a_style}>REGISTER</Link></MenuItem>
-          <MenuItem><Link to="/login" style={a_style}>SIGN IN</Link></MenuItem>
-          <MenuItem onClick={onClicklogout}>LOGOUT</MenuItem>
+          {user ? <MenuItem /> : <MenuItem><Link to="/register" style={a_style}>REGISTER</Link></MenuItem>}
+          {user ? <MenuItem /> : <MenuItem><Link to="/login" style={a_style}>SIGN IN</Link></MenuItem>}
+          {!user ? <MenuItem /> : <MenuItem onClick={onClicklogout}>LOGOUT</MenuItem>}
           <Link to="/cart">
           <MenuItem>
             <Badge badgeContent={quantity} color="primary">
