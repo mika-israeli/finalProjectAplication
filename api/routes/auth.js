@@ -5,12 +5,10 @@ const jwt = require("jsonwebtoken");
 
 //REGISTER
 router.post("/register", async (req, res) => {
-  console.log(req.body.pass);
   const encrypted = CryptoJS.TripleDES.encrypt(
     req.body.pass,
     process.env.PASS_SEC
   ).toString();
-  console.log(encrypted)
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
@@ -29,26 +27,19 @@ router.post("/register", async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try{
-      console.log(req.body.password);
         const user = await User.findOne(
             {
                 username: req.body.username
             }
         );
-        console.log(user);
         !user && res.status(401).json("Wrong User Name");
-        console.log(user.password);
-        console.log(process.env.PASS_SEC);
+    
         const hashedPassword = CryptoJS.TripleDES.decrypt(
             user.password,
             process.env.PASS_SEC
         );
 
-        console.log("hashedpass is: "+hashedPassword);
-
         const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-        
-        console.log("originalpass is: "+originalPassword);
 
         const inputPassword = req.body.password;
         

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {logout} from "../requestMethods"
 import './Css/Navbar.css'
 
 const Container = styled.div`
@@ -76,6 +77,11 @@ const a_style = {
 }
 
 const Navbar = () => {
+  const onClicklogout = () => {
+    logout();
+    alert("logged out successfully !")
+    window.location.reload(false);
+  }
   const quantity = useSelector(state=>state.cart.quantity)
   return (
     <Container>
@@ -93,6 +99,7 @@ const Navbar = () => {
         <Right>
           <MenuItem><Link to="/register" style={a_style}>REGISTER</Link></MenuItem>
           <MenuItem><Link to="/login" style={a_style}>SIGN IN</Link></MenuItem>
+          <MenuItem onClick={onClicklogout}>LOGOUT</MenuItem>
           <Link to="/cart">
           <MenuItem>
             <Badge badgeContent={quantity} color="primary">
