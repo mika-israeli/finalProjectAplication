@@ -1,5 +1,3 @@
-import { Send } from "@material-ui/icons";
-import { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import Mailchimp from 'react-mailchimp-form'
@@ -79,9 +77,6 @@ const MailchimpContainer = () =>{
 }
 
 const Newsletter = () => {
-
-
-  
 
   return (
     <Container>

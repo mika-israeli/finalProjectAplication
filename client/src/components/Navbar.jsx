@@ -1,12 +1,13 @@
 import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import {logout} from "../requestMethods"
 import './Css/Navbar.css'
+
 
 const Container = styled.div`
   height: 60px;
@@ -84,14 +85,20 @@ const Navbar = () => {
   }
   const user = useSelector((state) => state.user.currentUser);
   const quantity = useSelector(state=>state.cart.quantity)
+  const [caturl,setCaturl] = useState('')
+  let history = useHistory();
+  const handleSearchClick = ()=>{
+    history.push(caturl);
+  }
+
   return (
     <Container>
       <Wrapper>
         <Left>
           <Language>EN</Language>
           <SearchContainer>
-            <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
+            <Input placeholder="Search" onChange={(e)=>{setCaturl("/products/"+e.target.value)}}/>
+            <button onClick={handleSearchClick}><Search></Search></button>
           </SearchContainer>
         </Left>
         <Center>
