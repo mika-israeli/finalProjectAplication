@@ -62,8 +62,10 @@ const Register = () => {
   const [email,setEmail] = useState('')
   const [pass,setPass] = useState('')
   const [cpass,setCpass] = useState('')
-  const registerHandler = async() =>{
-      
+  const history = useHistory();
+  const registerHandler = async(e) => {
+
+      e.preventDefault();
       if(pass===cpass){
       try {
         
@@ -73,7 +75,8 @@ const Register = () => {
           email: email,
           pass: pass,
         })
-        
+        alert("Registerd Successfully Please login !s")
+        history.push("/login")
       } catch (err) {
         console.log(err);
       }}
@@ -89,9 +92,9 @@ const Register = () => {
           <Input placeholder="name" />
           <Input placeholder="last name" />
           <Input placeholder="username" onChange={(e)=>setUser(e.target.value)}/>
-          <Input placeholder="email" onChange={(e)=>setEmail(e.target.value)}/>
-          <Input placeholder="password" onChange={(e)=>setPass(e.target.value)} />
-          <Input placeholder="confirm password" onChange={(e)=>setCpass(e.target.value)}/>
+          <Input type="email" placeholder="email" onChange={(e)=>setEmail(e.target.value)}/>
+          <Input type="password" placeholder="password" onChange={(e)=>setPass(e.target.value)} />
+          <Input type="password" placeholder="confirm password" onChange={(e)=>setCpass(e.target.value)}/>
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>

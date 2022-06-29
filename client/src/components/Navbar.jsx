@@ -3,9 +3,9 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { Link,useHistory } from "react-router-dom";
-import {logout} from "../requestMethods"
+import {logout} from "../redux/apiCalls"
 import './Css/Navbar.css'
 
 
@@ -78,10 +78,11 @@ const a_style = {
 }
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const onClicklogout = () => {
-    logout();
-    alert("logged out successfully !")
-    window.location.reload(false);
+  logout(dispatch);
+  alert("logged out successfully !")
+  window.location.reload(false);
   }
   const user = useSelector((state) => state.user.currentUser);
   const quantity = useSelector(state=>state.cart.quantity)

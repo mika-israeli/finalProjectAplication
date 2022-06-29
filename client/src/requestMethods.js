@@ -8,7 +8,7 @@ const BASE_URL = "http://localhost:3030/api/";
 //   JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser
 //     .accessToken || "";
 
-const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
+const user = JSON.parse(localStorage.getItem("persist:user"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;
 const TOKEN = currentUser?.accessToken;
 
@@ -21,6 +21,3 @@ export const userRequest = axios.create({
   header: { token: `Bearer ${TOKEN}` },
 });
 
-export const logout = ()=>{
-  localStorage.removeItem("persist:root");
-}

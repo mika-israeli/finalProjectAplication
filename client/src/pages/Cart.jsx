@@ -1,5 +1,5 @@
 import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { removeProduct,addProductCartPage } from "../redux/cartRedux";
+import { clearCartData } from "../redux/apiCalls";
 
 
 
@@ -189,13 +191,30 @@ const Cart = () => {
         });
         history.push("/success", {
           stripeData: res.data,
-          products: cart, });
+          products: cart });
       } catch {}
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, history]);
   const quantity = useSelector(state=>state.cart.quantity)
+  const dispatch = useDispatch();
+  const clearHandler = () => {
+    //to add mongo DB clear !
+    clearCartData(dispatch)
+    window.location.reload(false);
+  }
+  const removeHandler = (product) => {
+    dispatch(
+      removeProduct(product)
+    )
+  }
+  const addHandler = (product) => {
+    dispatch(
+      addProductCartPage(product)
+    )
+  }
   
+
   return (
     <Container>
       <Navbar />
@@ -208,7 +227,7 @@ const Cart = () => {
             <TopText>Shopping Bag({quantity})</TopText>
             <TopText><Link to="./wishlist">Your Wishlist (0)</Link></TopText>
           </TopTexts>
-          <TopButton><Link to="./sales">HOT SALES</Link></TopButton>
+          <TopButton onClick={clearHandler}>CLEAR CART</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -231,11 +250,11 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add />
+                    <Add onClick={()=>addHandler(product)} style={{cursor: "pointer"}}/>
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
+                    <Remove onClick={()=>removeHandler(product)} style={{cursor: "pointer"}}/>
                   </ProductAmountContainer>
-                  <ProductPrice>
+                  <ProductPrice >
                     $ {product.price * product.quantity}
                   </ProductPrice>
                 </PriceDetail>
