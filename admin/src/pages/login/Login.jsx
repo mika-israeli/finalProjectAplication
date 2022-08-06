@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { login } from "../../redux/apiCalls";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { username, password });
+    history.push("/")
   };
 
   return (

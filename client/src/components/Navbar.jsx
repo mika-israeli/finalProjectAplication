@@ -79,17 +79,21 @@ const a_style = {
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const onClicklogout = () => {
-    logout(dispatch);
-    alert("logged out successfully !")
-    window.location.reload(false);
-  }
+  const products = useSelector((state) => state.cart.products)
   const user = useSelector((state) => state.user.currentUser);
   const quantity = useSelector(state=>state.cart.quantity)
   const [caturl,setCaturl] = useState('')
   let history = useHistory();
+
+
   const handleSearchClick = ()=>{
     history.push(caturl);
+  }
+
+  const onClicklogout = () => {
+    logout(dispatch,products,user._id);
+    alert("logged out successfully !")
+    history.push("/")
   }
 
   return (
@@ -103,19 +107,25 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
+          <Link to="/">
           <Logo>MMJBS Team</Logo>
+          </Link>
         </Center>
         <Right>
           {user ? <MenuItem /> : <MenuItem><Link to="/register" style={a_style}>REGISTER</Link></MenuItem>}
           {user ? <MenuItem /> : <MenuItem><Link to="/login" style={a_style}>SIGN IN</Link></MenuItem>}
           {!user ? <MenuItem /> : <MenuItem onClick={onClicklogout}>LOGOUT</MenuItem>}
-          <Link to="/cart">
+          {user ? <Link to="/cart">
           <MenuItem>
             <Badge badgeContent={quantity} color="primary">
               <ShoppingCartOutlined />
             </Badge>
-          </MenuItem>
-          </Link>
+          </MenuItem> 
+          </Link> : <MenuItem>
+            <Badge color="primary">
+              <ShoppingCartOutlined />
+            </Badge>
+          </MenuItem> }
         </Right>
       </Wrapper>
     </Container>

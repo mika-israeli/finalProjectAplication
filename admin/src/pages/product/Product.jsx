@@ -1,20 +1,21 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useHistory } from "react-router-dom";
 import "./product.css";
 import Chart from "../../components/chart/Chart";
-import { productData } from "../../dummyData";
-import { Publish } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { updateProduct } from "../../redux/apiCalls";
 
 export default function Product() {
   const location = useLocation();
+  const history = useHistory();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
-
+  const [updated,setUpdated] = useState({})
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
+  const dispatch = useDispatch();
 
   const MONTHS = useMemo(
     () => [
@@ -54,6 +55,12 @@ export default function Product() {
     getStats();
   }, [productId, MONTHS]);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    updateProduct(product._id,updated,dispatch)
+    history.push("/products")
+  }
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -91,26 +98,22 @@ export default function Product() {
         <form className="productForm">
           <div className="productFormLeft">
             <label>Product Name</label>
-            <input type="text" placeholder={product.title} />
+            <input type="text" placeholder={product.title} onChange={(e)=>setUpdated({...product,title: e.target.value})}/>
             <label>Product Description</label>
-            <input type="text" placeholder={product.desc} />
+            <input type="text" placeholder={product.desc} onChange={(e)=>setUpdated({...product,desc: e.target.value})}/>
             <label>Price</label>
-            <input type="text" placeholder={product.price} />
+            <input type="text" placeholder={product.price} onChange={(e)=>setUpdated({...product,price: e.target.value})}/>
             <label>In Stock</label>
             <select name="inStock" id="idStock">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              <option value="true" onClick={(e)=>setUpdated({...product,inStock: e.target.value})}>Yes</option>
+              <option value="false" onClick={(e)=>setUpdated({...product,inStock: e.target.value})}>No</option>
             </select>
           </div>
           <div className="productFormRight">
             <div className="productUpload">
               <img src={product.img} alt="" className="productUploadImg" />
-              <label for="file">
-                <Publish />
-              </label>
-              <input type="file" id="file" style={{ display: "none" }} />
             </div>
-            <button className="productButton">Update</button>
+            <button className="productButton" onClick={handleClick}>Update</button>
           </div>
         </form>
       </div>

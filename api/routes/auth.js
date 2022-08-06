@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
     const savedUser = await newUser.save();
     res.status(200).json(savedUser);
   } catch (err) {
-    res.status(500).json(err);
+    res.json(err);
   }
 });
 
@@ -28,6 +28,7 @@ router.post("/register", async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try{
+      console.log(req.body);
         const user = await User.findOne(
             {
                 username: req.body.username
@@ -55,7 +56,7 @@ router.post('/login', async (req, res) => {
         process.env.JWT_SEC,
             {expiresIn:"3d"}
         );
-  
+        
         const { password, ...others } = user._doc;  
         res.status(200).json({...others, accessToken});
 

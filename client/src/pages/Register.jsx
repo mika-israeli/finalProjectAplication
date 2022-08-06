@@ -65,7 +65,7 @@ const Register = () => {
   const [err,setErr] = useState(false)
   const history = useHistory();
   const registerHandler = async() =>{
-      
+      //e.preventDefault();
       if(pass===cpass){
       try {
         
@@ -83,6 +83,7 @@ const Register = () => {
       else{
         setErr(true);
       }
+      history.push("/")
     }
   return (
     <Container>
@@ -99,7 +100,7 @@ const Register = () => {
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button onClick={registerHandler}>CREATE</Button>
+          <Button onClick={registerHandler()}>CREATE</Button>
           {err && <span>passwords are not the same, please try again</span>}
         </Form>
       </Wrapper>

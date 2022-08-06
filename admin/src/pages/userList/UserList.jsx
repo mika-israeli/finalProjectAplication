@@ -1,19 +1,42 @@
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { getUsers,deleteUser } from "../../redux/apiCalls";
+import { Link, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export default function UserList() {
-  const [data, setData] = useState(userRows);
+const UserList = () => {
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  const [data,setData] = useState([])
+  const history = useHistory()
+  useEffect(()=>{
+    const getUser = async()=>{
+      const res = await getUsers()
+      let temp =[];
+      await res.forEach(element => {
+        temp.push({
+          id: element._id,
+          username: element.username,
+          email: element.email
+        })
+      });
+      setData(temp)
+      console.log(data);
+    }
+    getUser();
+  },[])
+  
+  console.log(data);
+  
+  //console.log(dataArray);
+  const handleDelete = async(id) => {
+    /*(data.filter((item) => item.id !== id));*/
+    await deleteUser(id)
+    window.location.reload(false)
   };
   
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "id", headerName: "ID", width: 200 },
     {
       field: "user",
       headerName: "User",
@@ -21,7 +44,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
+            <img className="userListImg" src="https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif" alt="" />
             {params.row.username}
           </div>
         );
@@ -43,6 +66,7 @@ export default function UserList() {
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
+        console.log(params.row.id);
         return (
           <>
             <Link to={"/user/" + params.row.id}>
@@ -70,3 +94,5 @@ export default function UserList() {
     </div>
   );
 }
+
+export default UserList

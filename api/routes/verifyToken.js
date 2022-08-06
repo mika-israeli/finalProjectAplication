@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
+  console.log("in verifyToken");
   const authHeader = req.headers.token;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
@@ -14,11 +15,15 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-const verifyTokenAndAuthorization = (req, res, next) => {
+const verifyTokenAndAuthorization = (req, res, next) => { 
+  console.log("in verify and AUTHORIZE !");
   verifyToken(req, res, () => {
+    console.log("user is : "+req.user.id);
+    console.log(req.params.id);
     if (req.user.id === req.params.id || req.user.isAdmin) {
       next();
     } else {
+      console.log("errorrrrrr verifyToken and authorize");
       res.status(403).json("You are not alowed to do that!");
     }
   });
