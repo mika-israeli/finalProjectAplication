@@ -7,11 +7,11 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
-import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { removeProduct,addProductCartPage } from "../redux/cartRedux";
 import { clearCartData } from "../redux/apiCalls";
+const axios = require("axios")
 
 
 
@@ -172,6 +172,8 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
   const history = useHistory();
+  const quantity = useSelector(state=>state.cart.quantity)
+  const dispatch = useDispatch();
   //let [bagSize,setBagSize] = useState(0);
 
   const onToken = (token) => {
@@ -185,7 +187,7 @@ const Cart = () => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await userRequest.post("/checkout/payment", {
+        const res = await axios.post("http://localhost:3030/api/checkout/payment", {
           tokenId: stripeToken.id,
           amount: 500,
         });
@@ -196,9 +198,9 @@ const Cart = () => {
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, history]);
-  const quantity = useSelector(state=>state.cart.quantity)
-  const dispatch = useDispatch();
+  
   const clearHandler = () => {
+    
     //to add mongo DB clear !
     clearCartData(dispatch)
     window.location.reload(false);
@@ -213,6 +215,9 @@ const Cart = () => {
       addProductCartPage(product)
     )
   }
+  const handleContinue = () => {
+    history.push("/")
+  }
   
 
   return (
@@ -222,7 +227,7 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton><Link to="/">CONTINUE SHOPPING</Link></TopButton>
+          <TopButton onClick={handleContinue}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag({quantity})</TopText>
             <TopText><Link to="./wishlist">Your Wishlist (0)</Link></TopText>

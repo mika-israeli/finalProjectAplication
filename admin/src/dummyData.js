@@ -1,3 +1,6 @@
+import { BluetoothDisabledSharp } from "@material-ui/icons";
+import {getUsers} from "./redux/apiCalls"
+
 export const userData = [
     {
       name: "Jan",
@@ -64,7 +67,7 @@ export const userData = [
     },
   ];
 
-  export const userRows = [
+  /*export const userRows = [
     {
       id: 1,
       username: "Jon Snow",
@@ -155,7 +158,7 @@ export const userData = [
       status: "active",
       transaction: "$120.00",
     },
-  ];
+  ];*/
 
   export const productRows = [
     {

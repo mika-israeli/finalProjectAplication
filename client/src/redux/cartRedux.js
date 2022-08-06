@@ -23,7 +23,7 @@ const cartSlice = createSlice({
       }
       else {//else if object is not in products[] will push him inside
         state.quantity += action.payload.quantity;
-        state.products.push(action.payload);
+        state.products = state.products.concat(state.products,[action.payload]);
         state.total += action.payload.price * action.payload.quantity;
       }
     },
@@ -49,15 +49,24 @@ const cartSlice = createSlice({
       }
       state.total -= action.payload.price;
     },
-    addProductCartPage: (state,action)=>{
+    addProductCartPage: (state,action)=>{// adding products inside /cart route and updates state !
       state.quantity += 1;
       state.products.filter(obj=> {
         return obj.desc === action.payload.desc
        }).forEach((item)=>item.quantity++)
       state.total += action.payload.price;
+    },
+    loadCart : (state,action) => {//load cart on login for a specific user !
+      state.products = action.payload;
+      action.payload.forEach(obj => {
+        state.quantity+=obj.quantity;
+      });
+      action.payload.forEach(obj => {
+        state.total+=obj.quantity * obj.price;
+      });
     }
   },
 });
 
-export const { addProduct,clearCart,removeProduct,addProductCartPage } = cartSlice.actions;
+export const { addProduct,clearCart,removeProduct,addProductCartPage,products,loadCart } = cartSlice.actions;
 export default cartSlice.reducer;

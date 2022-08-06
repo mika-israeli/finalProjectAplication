@@ -62,10 +62,10 @@ const Register = () => {
   const [email,setEmail] = useState('')
   const [pass,setPass] = useState('')
   const [cpass,setCpass] = useState('')
+  const [err,setErr] = useState(false)
   const history = useHistory();
-  const registerHandler = async(e) => {
-
-      e.preventDefault();
+  const registerHandler = async() =>{
+      //e.preventDefault();
       if(pass===cpass){
       try {
         
@@ -75,14 +75,15 @@ const Register = () => {
           email: email,
           pass: pass,
         })
-        alert("Registerd Successfully Please login !s")
-        history.push("/login")
+        alert("registerd !")
+        window.location("/login")
       } catch (err) {
         console.log(err);
       }}
       else{
-        alert("wrong !")
+        setErr(true);
       }
+      history.push("/")
     }
   return (
     <Container>
@@ -99,7 +100,8 @@ const Register = () => {
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button onClick={registerHandler}>CREATE</Button>
+          <Button onClick={registerHandler()}>CREATE</Button>
+          {err && <span>passwords are not the same, please try again</span>}
         </Form>
       </Wrapper>
     </Container>

@@ -23,6 +23,7 @@ router.post("/", verifyToken, async (req, res) => {
 //UPDATE
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
+    console.log("in server !!!s");
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
       {
@@ -60,6 +61,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
+    console.log("in server");
     const orders = await Order.find();
     res.status(200).json(orders);
   } catch (err) {

@@ -19,6 +19,16 @@ const persistConfig = {
   storage,
 };
 
+function saveToLocalStorage(state) {//will monitor local storage and update the state every time its called
+  try {
+    const serialisedState = JSON.stringify(state);
+    localStorage.setItem("persist:root", serialisedState);
+  } catch (e) {
+    console.warn(e);
+  }
+}
+
+
 const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
@@ -35,5 +45,7 @@ export const store = configureStore({
       },
     }),
 });
+
+store.subscribe(() => saveToLocalStorage(store.getState())); //called automatically whenever a dispatch function is executed, then will call saveToLocalStoarge!
 
 export let persistor = persistStore(store);

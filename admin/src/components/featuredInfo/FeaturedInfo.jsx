@@ -1,16 +1,18 @@
 import "./featuredInfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import { userRequest } from "../../requestMethods";
+import axios from "axios"
+import {store} from "../../redux/store"
 
 export default function FeaturedInfo() {
   const [income, setIncome] = useState([]);
   const [perc, setPerc] = useState(0);
-
+  const BASE_URL = "http://localhost:3030/api/"
+  
   useEffect(() => {
     const getIncome = async () => {
       try {
-        const res = await userRequest.get("orders/income");
+        const res = await axios.get(BASE_URL+"orders/income",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
         setIncome(res.data);
         setPerc((res.data[1].total * 100) / res.data[0].total - 100);
       } catch {}

@@ -14,11 +14,14 @@ import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
+import OrderList from "./pages/orderList/OrderList"
 import Login from "./pages/login/Login";
+import History from "./pages/history/History";
 import { useSelector } from "react-redux";
 
 function App() {
-  const admin = useSelector((state) => state.user.currentUser.isAdmin);
+  const admin = useSelector((state) => state.user.currentUser?.isAdmin);
+  console.log(admin);
   return (
     <Router>
       <Switch>
@@ -50,6 +53,12 @@ function App() {
               </Route>
               <Route path="/newproduct">
                 <NewProduct />
+              </Route>
+              <Route path="/orders">
+                <OrderList />
+              </Route>
+              <Route path="/history">
+                <History />
               </Route>
             </div>
           </>

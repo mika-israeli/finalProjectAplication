@@ -7,7 +7,6 @@ import Cart from "./pages/Cart";
 import Tracking from "./pages/Tracking"
 import Myaccount from "./pages/Myaccount"
 import Wishlist from "./pages/Wishlist"
-import Sales from "./pages/Sales"
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,7 +39,7 @@ const App = () => {
         </Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">
-          {user ? <Redirect to="/" /> : <Register />}
+          <Register />
         </Route>
         <Route path="/tracking">
           <Tracking/>
@@ -50,9 +49,6 @@ const App = () => {
         </Route>
         <Route path="/myaccount">
           <Myaccount/>
-        </Route>
-        <Route path="/sales">
-          <Sales/>
         </Route>
       </Switch>
     </Router>
