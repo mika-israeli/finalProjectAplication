@@ -10,7 +10,7 @@ const cartSlice = createSlice({
   reducers: {
     addProduct: (state, action) => {
       
-      if(state.products.find(obj=> {// will concat objects in products[] instead of pushing few copyies from the same instances !
+      if(state.products.find(obj=> {// will unite objects in products[] instead of pushing few copyies from the same instances !
         return obj.desc === action.payload.desc
       }))
       {
@@ -18,12 +18,12 @@ const cartSlice = createSlice({
           return obj.desc === action.payload.desc
         }).quantity += action.payload.quantity;
         state.quantity += action.payload.quantity;
-        console.log(state.quantity);
         state.total += action.payload.price * action.payload.quantity
       }
       else {//else if object is not in products[] will push him inside
         state.quantity += action.payload.quantity;
-        state.products = state.products.concat(state.products,[action.payload]);
+        
+        state.products.push(action.payload);
         state.total += action.payload.price * action.payload.quantity;
       }
     },

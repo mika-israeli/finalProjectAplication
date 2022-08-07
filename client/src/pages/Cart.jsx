@@ -191,17 +191,16 @@ const Cart = () => {
           tokenId: stripeToken.id,
           amount: 500,
         });
+        console.log(res.data);
         history.push("/success", {
           stripeData: res.data,
           products: cart });
       } catch {}
     };
-    stripeToken && makeRequest();
+    makeRequest();
   }, [stripeToken, cart.total, history]);
   
   const clearHandler = () => {
-    
-    //to add mongo DB clear !
     clearCartData(dispatch)
     window.location.reload(false);
   }
@@ -218,7 +217,7 @@ const Cart = () => {
   const handleContinue = () => {
     history.push("/")
   }
-  
+  console.log(cart.products);
 
   return (
     <Container>
@@ -285,9 +284,10 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
+            {stripeToken && <span>Processing... Please Wait !</span>}
             <StripeCheckout
               name="A-TEAM Shop"
-              image="../img/car.png"
+              image={__dirname+"/img/Checkout-icon.png"}
               billingAddress
               shippingAddress
               description={`Your total is $${cart.total}`}

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import {useDispatch} from "react-redux"
 import { mobile } from "../responsive";
+import { login } from "../redux/apiCalls";
 const axios = require("axios")
 
 const Container = styled.div`
@@ -64,25 +66,25 @@ const Register = () => {
   const [cpass,setCpass] = useState('')
   const [err,setErr] = useState(false)
   const history = useHistory();
-  const registerHandler = async() =>{
-      //e.preventDefault();
+  const dispatch = useDispatch()
+  const registerHandler = async(e) =>{
+      e.preventDefault();
       if(pass===cpass){
       try {
-        
         await axios.post("http://localhost:3030/api/auth/register",
         {
           username: username,
           email: email,
           pass: pass,
         })
-        alert("registerd !")
-        window.location("/login")
+        alert("Registerd Successfully !")
       } catch (err) {
         console.log(err);
       }}
       else{
         setErr(true);
       }
+      await login(dispatch, { username, pass });
       history.push("/")
     }
   return (
@@ -90,8 +92,6 @@ const Register = () => {
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
           <Input placeholder="username" onChange={(e)=>setUser(e.target.value)}/>
           <Input type="email" placeholder="email" onChange={(e)=>setEmail(e.target.value)}/>
           <Input type="password" placeholder="password" onChange={(e)=>setPass(e.target.value)} />
@@ -100,7 +100,7 @@ const Register = () => {
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button onClick={registerHandler()}>CREATE</Button>
+          <Button onClick={registerHandler}>CREATE</Button>
           {err && <span>passwords are not the same, please try again</span>}
         </Form>
       </Wrapper>
