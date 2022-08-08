@@ -1,4 +1,4 @@
-fix delete cart in db after order success !
-fix clear cart data in dispatch as well ! 
+facebook api
+google maps api
 
 fix admin graphs

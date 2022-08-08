@@ -189,9 +189,10 @@ const Cart = () => {
       try {
         const res = await axios.post("http://localhost:3030/api/checkout/payment", {
           tokenId: stripeToken.id,
-          amount: 500,
+          amount: cart.total,
         });
         console.log(res.data);
+        console.log(res.status);
         history.push("/success", {
           stripeData: res.data,
           products: cart });
@@ -217,8 +218,6 @@ const Cart = () => {
   const handleContinue = () => {
     history.push("/")
   }
-  console.log(cart.products);
-
   return (
     <Container>
       <Navbar />
@@ -287,9 +286,8 @@ const Cart = () => {
             {stripeToken && <span>Processing... Please Wait !</span>}
             <StripeCheckout
               name="A-TEAM Shop"
-              image={__dirname+"/img/Checkout-icon.png"}
-              billingAddress
-              shippingAddress
+              zipCode={false}
+              //image={""}
               description={`Your total is $${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
