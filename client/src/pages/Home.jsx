@@ -7,6 +7,7 @@ import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
 import YoutubeEmbed from "../components/Video";
+import GoogleMaps from "../components/GoogleMaps";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <Announcement />
       <Navbar />
       <Slider />
+      <GoogleMaps />
       <YoutubeEmbed embedId="rokGy0huYEA" />
       <Categories />
       <Products />
