@@ -7,6 +7,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { Link,useHistory } from "react-router-dom";
 import {logout} from "../redux/apiCalls"
 import './Css/Navbar.css'
+import icon from "../img/icon.jpg";
 
 
 const Container = styled.div`
@@ -26,6 +27,16 @@ const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+`;
+
+const Image = styled.img`
+  display: flex;
+  padding: 0px 10px;
+  ${mobile({ padding: "0px" })}
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
 `;
 
 const Language = styled.span`
@@ -100,6 +111,7 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
+          <Image src={icon} alt="logo" />
           <Language>EN</Language>
           <SearchContainer>
             <Input placeholder="Search" onChange={(e)=>{setCaturl("/products/"+e.target.value)}}/>
