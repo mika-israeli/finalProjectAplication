@@ -8,6 +8,7 @@ import { Link,useHistory } from "react-router-dom";
 import {logout} from "../redux/apiCalls"
 import './Css/Navbar.css'
 import icon from "../img/icon.jpg";
+import Sidebar from "./Sidebar";
 
 
 const Container = styled.div`
@@ -137,6 +138,7 @@ const Navbar = () => {
             <Badge color="primary">
               <ShoppingCartOutlined />
             </Badge>
+            <Sidebar/>
           </MenuItem> }
         </Right>
       </Wrapper>
