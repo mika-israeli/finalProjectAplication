@@ -138,7 +138,6 @@ const Navbar = () => {
             <Badge color="primary">
               <ShoppingCartOutlined />
             </Badge>
-            <Sidebar/>
           </MenuItem> }
         </Right>
       </Wrapper>

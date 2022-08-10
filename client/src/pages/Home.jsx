@@ -7,10 +7,12 @@ import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
 import YoutubeEmbed from "../components/Video";
+import Sidebar from "../components/Sidebar";
 
 const Home = () => {
   return (
     <div>
+      <Sidebar />
       <Announcement />
       <Navbar />
       <Slider />
