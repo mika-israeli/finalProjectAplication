@@ -49,7 +49,7 @@ const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   display: flex;
   align-items: center;
-  margin-left: 25px;
+  margin-left: 100px;
   padding: 5px;
 `;
 
@@ -107,8 +107,13 @@ const Navbar = () => {
 
   return (
     <Container>
+      {/* <Sidebar /> */}
       <Wrapper>
         <Left>
+          <Sidebar
+            pageWrapId={"page-wrap"}
+            outerContainerId={"outer-container"}
+          />
           <Image src={icon} alt="logo" />
           <Language>EN</Language>
           <SearchContainer>
@@ -164,11 +169,6 @@ const Navbar = () => {
             <MenuItem>
               <Badge color="primary">
                 <ShoppingCartOutlined />
-                <Sidebar
-                  pageWrapId={"page-wrap"}
-                  outerContainerId={"outer-container"}
-                />
-                <Sidebar />
               </Badge>
             </MenuItem>
           )}
