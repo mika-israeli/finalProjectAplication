@@ -14,10 +14,10 @@ const Home = () => {
       <Announcement />
       <Navbar />
       <Slider />
+      <YoutubeEmbed embedId="rokGy0huYEA" />
       <Categories />
       <Products />
       <Newsletter />
-      <YoutubeEmbed embedId="rokGy0huYEA" />
       <Footer />
     </div>
   );
