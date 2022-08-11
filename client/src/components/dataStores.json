@@ -10,9 +10,9 @@
       "properties": {
         "PARK_ID": 960,
         "FACILITYID": 28014,
-        "NAME": "Bearbrook Skateboard Park",
-        "NAME_FR": "Planchodrome Bearbrook",
-        "ADDRESS": "8720 Russell Road",
+        "NAME": "Jony's Shop",
+        "NAME_FR": "Jony's Shop",
+        "ADDRESS": "Gindi TLV 2",
         "ADDRESS_FR": "8720, chemin Russell",
         "FACILITY_T": "flat",
         "FACILITY_1": "plat",
@@ -32,7 +32,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-75.3372987731628, 45.383321536272049]
+        "coordinates": [32.0680377939317, 34.783520380548566]
       }
     },
     {
@@ -62,7 +62,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-75.546518086577947, 45.467134581917357]
+        "coordinates": [31.97484190268941, 34.783207702149596]
       }
     },
     {
@@ -92,7 +92,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-75.898610599532319, 45.295014379864874]
+        "coordinates": [31.9699472570471, 34.77283013280166]
       }
     },
     {
@@ -122,7 +122,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-75.468561642270757, 45.23032561834377]
+        "coordinates": [32.08327865822345, 34.779513130982416]
       }
     },
     {

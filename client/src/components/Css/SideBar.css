@@ -25,7 +25,7 @@
   
   /* Color/shape of close button cross */
   .bm-cross {
-    background: #bdc3c7;
+    background: black;
   }
   
   /*
@@ -39,7 +39,7 @@
   
   /* General sidebar styles */
   .bm-menu {
-    background: #D3D3D3;
+    background: #F0FFFF;
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
   }
@@ -76,5 +76,5 @@
   }
   
   .bm-item:hover {
-    color: #ffffff;
+    color: #44d110;
   }

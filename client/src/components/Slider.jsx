@@ -29,7 +29,7 @@ const Arrow = styled.div`
   margin: auto;
   cursor: pointer;
   opacity: 0.5;
-  z-index: -1;
+  z-index: 1;
 `;
 
 const Wrapper = styled.div`
