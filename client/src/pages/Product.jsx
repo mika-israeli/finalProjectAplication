@@ -9,7 +9,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { addProduct } from "../redux/cartRedux";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const Container = styled.div``;
 
@@ -135,7 +135,9 @@ const Product = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await axios.get("http://localhost:3030/api/products/find/" + id);
+        const res = await axios.get(
+          "http://localhost:3030/api/products/find/" + id
+        );
         setProduct(res.data);
         console.log(product);
       } catch {}
@@ -153,13 +155,11 @@ const Product = () => {
 
   const handleClick = () => {
     console.log({ ...product, quantity, color, size });
-    dispatch(
-      addProduct({ ...product, quantity, color, size })
-    );
+    dispatch(addProduct({ ...product, quantity, color, size }));
   };
-  const handleLogin = ()=> {
-    history.push("/login")
-  }
+  const handleLogin = () => {
+    history.push("/login");
+  };
   return (
     <Container>
       <Navbar />
@@ -194,7 +194,11 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            {user ? <Button onClick={handleClick}>ADD TO CART</Button> : <Button onClick={handleLogin}>PLEASE LOGIN</Button>}
+            {user ? (
+              <Button onClick={handleClick}>ADD TO CART</Button>
+            ) : (
+              <Button onClick={handleLogin}>PLEASE LOGIN</Button>
+            )}
           </AddContainer>
         </InfoContainer>
       </Wrapper>

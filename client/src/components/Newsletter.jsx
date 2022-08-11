@@ -77,8 +77,8 @@ const MailchimpContainer = () => {
 const Newsletter = () => {
   return (
     <Container>
-      <Title>Newsletter</Title>
-      <Desc>Get timely updates from your favorite products.</Desc>
+      <Title> KEEP IN TOUCH</Title>
+      <Desc>Get updates about our SALES.</Desc>
       <MailchimpContainer />
     </Container>
   );

@@ -30,10 +30,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5fbfd;
+  background-color: #ffebcd;
   position: relative;
 
-  &:hover ${Info}{
+  &:hover ${Info} {
     opacity: 1;
   }
 `;
@@ -42,7 +42,7 @@ const Circle = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-color: white;
+  background-color: none;
   position: absolute;
 `;
 
@@ -78,7 +78,7 @@ const Product = ({ item }) => {
         </Icon>
         <Icon>
           <Link to={`/product/${item._id}`}>
-          <SearchOutlined />
+            <SearchOutlined />
           </Link>
         </Icon>
         <Icon>
