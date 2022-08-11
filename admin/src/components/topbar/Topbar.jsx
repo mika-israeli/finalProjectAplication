@@ -4,13 +4,9 @@ import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutuser } from "../../redux/apiCalls";
-import icon from "../img/icon.jpg";
+import icon from "../../img/icon.jpg";
 
-const Logo = styled.h1`
-  font-weight: bold;
-  ${mobile({ fontSize: "24px" })}
-`;
-
+/////////////////////
 export default function Topbar() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -35,7 +31,7 @@ export default function Topbar() {
             <NotificationsNone />
             <span className="topIconBadge">2</span>
           </div>
-          <Image src={icon} alt="logo" />
+          {/* <img src={icon} alt="logo" /> */}
           <div className="topbarIconContainer">
             <Language />
             <span className="topIconBadge">2</span>

@@ -14,7 +14,7 @@ import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
-import OrderList from "./pages/orderList/OrderList"
+import OrderList from "./pages/orderList/OrderList";
 import Login from "./pages/login/Login";
 import History from "./pages/history/History";
 import { useSelector } from "react-redux";
@@ -25,9 +25,12 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
+        {!admin && (
+          <Route path="/login">
+            <Login />
+          </Route>
+        )}
+
         {admin && (
           <>
             <Topbar />
