@@ -4,6 +4,27 @@ import Mailchimp from "react-mailchimp-form";
 import "./Css/Newsletter.css";
 import GoogleMaps from "./GoogleMaps";
 
+const BigContainer = styled.div`
+  display: flex;
+  background-color: #fcf5f5;
+`;
+
+const GoogleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  padding: 20px;
+  ${mobile({ height: "50vh" })}
+  margin-left: 400px;
+  margin-top: 90px;
+`;
+
+const GoogleTitle = styled.h3`
+  font-size: 30px;
+  margin-bottom: 20px;
+`;
+
 const Container = styled.div`
   height: 60vh;
   background-color: #fcf5f5;
@@ -11,6 +32,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-left: 70px;
 `;
 const Title = styled.h1`
   font-size: 70px;
@@ -76,11 +98,20 @@ const MailchimpContainer = () => {
 
 const Newsletter = () => {
   return (
-    <Container>
-      <Title>Newsletter</Title>
-      <Desc>Get timely updates from your favorite products.</Desc>
-      <MailchimpContainer />
-    </Container>
+    
+    <BigContainer>
+      <Container>
+        <Title>Newsletter</Title>
+        <Desc>Get timely updates from your favorite products.</Desc>
+        <MailchimpContainer />
+      </Container>
+      <GoogleContainer>
+        <GoogleTitle>Find us on Google Maps</GoogleTitle>
+        <GoogleMaps />
+      </GoogleContainer>
+     </BigContainer>
+
+    
   );
 };
 
