@@ -30,10 +30,17 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
   background-color: #ffebcd;
   position: relative;
 
   &:hover ${Info} {
+=======
+  background-color: #f5fbfd;
+  position: relative;
+
+  &:hover ${Info}{
+>>>>>>> saarbranchv4
     opacity: 1;
   }
 `;
@@ -42,7 +49,11 @@ const Circle = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
+<<<<<<< HEAD
   background-color: none;
+=======
+  background-color: white;
+>>>>>>> saarbranchv4
   position: absolute;
 `;
 
@@ -78,7 +89,11 @@ const Product = ({ item }) => {
         </Icon>
         <Icon>
           <Link to={`/product/${item._id}`}>
+<<<<<<< HEAD
             <SearchOutlined />
+=======
+          <SearchOutlined />
+>>>>>>> saarbranchv4
           </Link>
         </Icon>
         <Icon>

@@ -13,7 +13,12 @@ export default function FeaturedInfo() {
     const getIncome = async () => {
       try {
         const res = await axios.get(BASE_URL+"orders/income",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+<<<<<<< HEAD
         setIncome(res.data);
+=======
+        console.log(res.data);
+        setIncome(res.data[0]);
+>>>>>>> saarbranchv4
         setPerc((res.data[1].total * 100) / res.data[0].total - 100);
       } catch {}
     };
@@ -25,7 +30,11 @@ export default function FeaturedInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Revanue</span>
         <div className="featuredMoneyContainer">
+<<<<<<< HEAD
           <span className="featuredMoney">${income[1]?.total}</span>
+=======
+          <span className="featuredMoney">${income?.total}</span>
+>>>>>>> saarbranchv4
           <span className="featuredMoneyRate">
             %{Math.floor(perc)}{" "}
             {perc < 0 ? (

@@ -7,6 +7,10 @@ const {
 const CryptoJS = require("crypto-js");
 
 const router = require("express").Router();
+<<<<<<< HEAD
+=======
+const client = require("mailchimp-marketing");
+>>>>>>> saarbranchv4
 
 //UPDATE
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
@@ -95,4 +99,22 @@ router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+/*---------------------------------- Admin Mails -------------------------*/
+router.post("/email",async (req,res)=> {
+  client.setConfig({
+    apiKey: "efae8d0c7dd38b1a27af7f2ad560c1ef-us17",
+    server: "us17",
+  });
+  try {
+    const response = await client.campaigns.send("999fb8c13d");
+  res.status(200).json(response)
+  } catch (error) {
+    console.log(error);
+  }
+  
+})
+
+>>>>>>> saarbranchv4
 module.exports = router;

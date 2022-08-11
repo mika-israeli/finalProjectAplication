@@ -8,6 +8,10 @@ import { axios } from "axios";
 import { store } from "../../redux/store";
 import { getUserStats } from "../../redux/apiCalls";
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> saarbranchv4
 export default function Home() {
   const [userStats, setUserStats] = useState([]);
 

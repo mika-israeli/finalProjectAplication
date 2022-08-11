@@ -16,6 +16,10 @@ router.post("/", verifyToken, async (req, res) => {
     const savedOrder = await newOrder.save();
     res.status(200).json(savedOrder);
   } catch (err) {
+<<<<<<< HEAD
+=======
+    console.log(err);
+>>>>>>> saarbranchv4
     res.status(500).json(err);
   }
 });
@@ -57,6 +61,19 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+router.get("/findorder/:orderId", verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const orders = await Order.findOne({_id: req.params.orderId });
+    console.log(orders);
+    res.status(200).json(orders);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+>>>>>>> saarbranchv4
 // //GET ALL
 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
@@ -106,4 +123,16 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const users = await Order.find().sort({ _id: -1 }).limit(5)
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+>>>>>>> saarbranchv4
 module.exports = router;

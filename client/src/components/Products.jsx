@@ -4,6 +4,10 @@ import { popularProducts } from "../data";
 import Product from "./Product";
 import axios from "axios";
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> saarbranchv4
 const Container = styled.div`
   padding: 20px;
   display: flex;
@@ -22,9 +26,15 @@ const Products = ({ cat, filters, sort }) => {
           cat
             ? `http://localhost:3030/api/products?category=${cat}`
             : "http://localhost:3030/api/products"
+<<<<<<< HEAD
 
           // ? `http://localhost:PORT${process.env.PORT}/api/products?category=${cat}`
           // : `http://localhost:${process.env.PORT}/api/products`
+=======
+            
+            // ? `http://localhost:PORT${process.env.PORT}/api/products?category=${cat}`
+            // : `http://localhost:${process.env.PORT}/api/products`
+>>>>>>> saarbranchv4
         );
         console.log(res);
         setProducts(res.data);
@@ -69,10 +79,17 @@ const Products = ({ cat, filters, sort }) => {
   //           .map((item) => <Product item={item} key={item.id} />)}
   //   </Container>
   // );
+<<<<<<< HEAD
 
   return (
     <Container>
       {cat
+=======
+  
+    return (
+    <Container>
+       {cat
+>>>>>>> saarbranchv4
         ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : products
             .slice(0, 8)
@@ -83,6 +100,12 @@ const Products = ({ cat, filters, sort }) => {
 
 export default Products;
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> saarbranchv4
 // JONY Test --------------------------------------------------
 
 // import styled from "styled-components";
@@ -103,7 +126,11 @@ export default Products;
 
 //     const [products, setProducts] = useState([]);
 //   const [filteredProducts, setFilteredProducts] = useState([]);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> saarbranchv4
 //   useEffect(() => {
 //     const getProducts = async () => {
 //       try {
@@ -129,6 +156,10 @@ export default Products;
 //       );
 //   },[products,cat,filters]);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> saarbranchv4
 //   return (
 //     <Container>
 //       {filteredProducts.map((item) => (
@@ -139,3 +170,7 @@ export default Products;
 // };
 
 // export default Products;
+<<<<<<< HEAD
+=======
+
+>>>>>>> saarbranchv4

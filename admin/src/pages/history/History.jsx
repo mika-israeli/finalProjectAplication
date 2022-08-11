@@ -3,6 +3,10 @@ import { DataGrid } from "@material-ui/data-grid";
 import React from "react";
 import { useEffect,useState } from "react";
 import { getOrders } from "../../redux/apiCalls";
+<<<<<<< HEAD
+=======
+import { Link } from "react-router-dom";
+>>>>>>> saarbranchv4
 
 export default function History() {
 
@@ -13,7 +17,11 @@ export default function History() {
     useEffect(()=>{
         const getOr = async() => {
             const res = await getOrders();
+<<<<<<< HEAD
             const data = res.filter((ord)=>ord.status === "arrived")
+=======
+            const data = res.filter((ord)=>ord.status === "Completed")
+>>>>>>> saarbranchv4
             setOrders(data);
         }
         getOr()
@@ -44,6 +52,21 @@ export default function History() {
       headerName: "Status",
       width: 150,
     },
+<<<<<<< HEAD
+=======
+    {
+      field: "info",
+      headerName: "Info",
+      width: 150,
+      renderCell: (params)=> {
+        return (
+                    <Link to={"/order/"+params.row._id}>
+                    <button className="userListEdit">Etc...</button>
+                    </Link>
+        )
+      }
+    }
+>>>>>>> saarbranchv4
   ];
 
   return (

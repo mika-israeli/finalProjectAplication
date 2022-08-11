@@ -9,7 +9,11 @@ import {
 } from "@material-ui/icons";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+<<<<<<< HEAD
 import "./Css/Navbar.css";
+=======
+import './Css/Navbar.css'
+>>>>>>> saarbranchv4
 
 const Container = styled.div`
   display: flex;
@@ -72,6 +76,10 @@ const Right = styled.div`
   flex: 1;
   padding: 20px;
   ${mobile({ backgroundColor: "#fff8f8" })}
+<<<<<<< HEAD
+=======
+
+>>>>>>> saarbranchv4
 `;
 
 const ContactItem = styled.div`
@@ -81,7 +89,11 @@ const ContactItem = styled.div`
 `;
 
 const Payment = styled.img`
+<<<<<<< HEAD
   width: 50%;
+=======
+    width: 50%;
+>>>>>>> saarbranchv4
 `;
 
 const Footer = () => {
@@ -89,7 +101,15 @@ const Footer = () => {
     <Container>
       <Left>
         <Logo>MMJBS dev team</Logo>
+<<<<<<< HEAD
         <Desc>In our store you can find everything you dreaned of!</Desc>
+=======
+        <Desc>
+          There are many variations of passages of Lorem Ipsum available, but
+          the majority have suffered alteration in some form, by injected
+          humour, or randomised words which don’t look even slightly believable.
+        </Desc>
+>>>>>>> saarbranchv4
         <SocialContainer>
           <SocialIcon color="3B5999">
             <Facebook />
@@ -108,6 +128,7 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
+<<<<<<< HEAD
           <ListItem>
             <a href="../">Home</a>
           </ListItem>
@@ -129,11 +150,21 @@ const Footer = () => {
           <ListItem>
             <a href="../wishlist">Wishlist</a>
           </ListItem>
+=======
+          <ListItem><a href="../">Home</a></ListItem>
+          <ListItem><a href="../cart">Cart</a></ListItem>
+          <ListItem><a href="./products/man">Man Fashion</a></ListItem>
+          <ListItem><a href="./products/women">Woman Fashion</a></ListItem>
+          <ListItem><a href="../myaccount">My Account</a></ListItem>
+          <ListItem><a href="../tracking">Order Tracking</a></ListItem>
+          <ListItem><a href="../wishlist">Wishlist</a></ListItem>
+>>>>>>> saarbranchv4
         </List>
       </Center>
       <Right>
         <Title>Contact</Title>
         <ContactItem>
+<<<<<<< HEAD
           <Room style={{ marginRight: "10px" }} /> Elie Wiesel St 2, Rishon
           LeTsiyon
         </ContactItem>
@@ -145,6 +176,15 @@ const Footer = () => {
           <a href="mailto:approjectcolman@gmail.com">
             approjectcolman@gmail.com
           </a>
+=======
+          <Room style={{marginRight:"10px"}}/> Elie Wiesel St 2, Rishon LeTsiyon
+        </ContactItem>
+        <ContactItem>
+          <Phone style={{marginRight:"10px"}}/> +972 3 977 31 43
+        </ContactItem>
+        <ContactItem>
+          <MailOutline style={{marginRight:"10px"}} /> <a href="mailto:approjectcolman@gmail.com">approjectcolman@gmail.com</a> 
+>>>>>>> saarbranchv4
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>

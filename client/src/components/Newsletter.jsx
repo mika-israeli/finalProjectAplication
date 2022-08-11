@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+<<<<<<< HEAD
 import Mailchimp from "react-mailchimp-form";
 import "./Css/Newsletter.css";
 import GoogleMaps from "./GoogleMaps";
@@ -24,6 +25,10 @@ const GoogleTitle = styled.h3`
   font-size: 30px;
   margin-bottom: 20px;
 `;
+=======
+import Mailchimp from 'react-mailchimp-form'
+import "./Css/Newsletter.css"
+>>>>>>> saarbranchv4
 
 const Container = styled.div`
   height: 60vh;
@@ -32,7 +37,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+<<<<<<< HEAD
   margin-left: 70px;
+=======
+>>>>>>> saarbranchv4
 `;
 const Title = styled.h1`
   font-size: 70px;
@@ -44,6 +52,10 @@ const Desc = styled.div`
   font-weight: 300;
   margin-bottom: 20px;
   ${mobile({ textAlign: "center" })}
+<<<<<<< HEAD
+=======
+
+>>>>>>> saarbranchv4
 `;
 
 const InputContainer = styled.div`
@@ -69,6 +81,7 @@ const Button = styled.button`
   color: white;
 `;
 
+<<<<<<< HEAD
 const MailchimpContainer = () => {
   return (
     <div>
@@ -109,6 +122,45 @@ const Newsletter = () => {
         <GoogleMaps />
       </GoogleContainer>
     </BigContainer>
+=======
+const MailchimpContainer = () =>{
+  return(
+    <div>
+       <Mailchimp
+        action='https://gmail.us17.list-manage.com/subscribe/post?u=14d33edf747c62eeb135d694f&amp;id=b957a83444'
+        fields={[
+          {
+            name: 'EMAIL',
+            placeholder: 'Email',
+            type: 'email',
+            required: true
+          }
+        ]} 
+        messages={
+                   {
+                       sending: "Sending...",
+                       success: "Thank you for subscribing!",
+                       error: "An unexpected internal error has occurred.",
+                       empty: "You must write an e-mail.",
+                       duplicate: "Too many subscribe attempts for this email address",
+                       button: "Subscribe!"
+                   }
+               } 
+        className='form'
+        />
+    </div>
+  )
+}
+
+const Newsletter = () => {
+
+  return (
+    <Container>
+      <Title>Newsletter</Title>
+      <Desc>Get timely updates from your favorite products.</Desc>
+        <MailchimpContainer/>
+    </Container>
+>>>>>>> saarbranchv4
   );
 };
 

@@ -160,9 +160,26 @@ export const deleteOrder = async(id)=> {
   }
 } 
 
+<<<<<<< HEAD
 export const getOrderById = async(id) => {
   try {
     const res = await axios.get(BASE_URL+"orders/find/"+id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
+=======
+export const getOrderByUserId = async(id) => {
+  try {
+    const res = await axios.get(BASE_URL+"orders/find/"+id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
+    console.log(res.data);
+    return res.data
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getOrderByOrderId = async(id) => {
+  try {
+    const res = await axios.get(BASE_URL+"orders/findorder/"+id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
+    console.log(res.data);
+>>>>>>> saarbranchv4
     return res.data
   } catch (err) {
     console.log(err);
@@ -177,3 +194,16 @@ export const updateOrder = async (id,order) => {
   }
 }
 
+<<<<<<< HEAD
+=======
+export const getFiveNewOrders = async () => {
+  try {
+    const res = await axios.get(BASE_URL+"orders/stats",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    console.log(res.data);
+    return res.data
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+>>>>>>> saarbranchv4

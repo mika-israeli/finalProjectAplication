@@ -137,3 +137,16 @@ export const addOrder = async(order) => {
 }
 
 
+<<<<<<< HEAD
+=======
+//------------------------------------Products-api------------------------------------------------//
+export const getProducts = async ()=> {
+  try {
+    const res = await axios.get(`http://localhost:3030/api/products`);
+    return res.data
+  } catch (error) {
+    
+  }
+  
+}
+>>>>>>> saarbranchv4

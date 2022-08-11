@@ -14,9 +14,17 @@ import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
+<<<<<<< HEAD
 import OrderList from "./pages/orderList/OrderList";
 import Login from "./pages/login/Login";
 import History from "./pages/history/History";
+=======
+import OrderList from "./pages/orderList/OrderList"
+import Login from "./pages/login/Login";
+import History from "./pages/history/History";
+import Contact from "./pages/contact/Contact"
+import Order from "./pages/order/Order"
+>>>>>>> saarbranchv4
 import { useSelector } from "react-redux";
 
 function App() {
@@ -25,12 +33,19 @@ function App() {
   return (
     <Router>
       <Switch>
+<<<<<<< HEAD
         {!admin && (
           <Route path="/login">
             <Login />
           </Route>
         )}
 
+=======
+        <Route path="/login">
+          <Login />
+        </Route>
+        {!admin && <Redirect to="/login"/>}
+>>>>>>> saarbranchv4
         {admin && (
           <>
             <Topbar />
@@ -60,9 +75,21 @@ function App() {
               <Route path="/orders">
                 <OrderList />
               </Route>
+<<<<<<< HEAD
               <Route path="/history">
                 <History />
               </Route>
+=======
+              <Route path="/order/:orderId">
+                <Order />
+              </Route>
+              <Route path="/history">
+                <History />
+              </Route>
+              <Route path="/contact">
+                <Contact />
+              </Route>
+>>>>>>> saarbranchv4
             </div>
           </>
         )}

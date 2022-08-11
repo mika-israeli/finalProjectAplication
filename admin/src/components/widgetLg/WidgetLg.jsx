@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { getOrders } from "../../redux/apiCalls";
+=======
+import { getFiveNewOrders } from "../../redux/apiCalls";
+>>>>>>> saarbranchv4
 import "./widgetLg.css";
 import {format} from "timeago.js"
 
@@ -11,8 +15,13 @@ export default function WidgetLg() {
 
   useEffect(() => {
     const getOr = async()=> {
+<<<<<<< HEAD
       const res = await getOrders();
       
+=======
+      const res = await getFiveNewOrders();
+      console.log(res);
+>>>>>>> saarbranchv4
       setOrders(res)
     }
     getOr()
