@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import icon from "../img/icon.jpg";
 import {
   withGoogleMap,
   withScriptjs,
@@ -7,8 +6,9 @@ import {
   Marker,
   InfoWindow,
 } from "react-google-maps";
-import * as storeData from "./dataStores.json";
-import mapStyles from "./mapStyles";
+import storeData from "./dataStores.json";
+// import mapStyles from "./mapStyles";
+import icon from "../img/icon.jpg";
 
 function Map() {
   const [selectedStore, setSelectedStore] = useState(null);
@@ -30,11 +30,11 @@ function Map() {
     <GoogleMap
       defaultZoom={10}
       defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
-      defaultOptions={{ styles: mapStyles }}
+      //   defaultOptions={{ styles: mapStyles }}
     >
       {storeData.features.map((store) => (
         <Marker
-          key={store.properties.STORE_ID}
+          key={store.properties.PARK_ID}
           position={{
             lat: store.geometry.coordinates[1],
             lng: store.geometry.coordinates[0],
@@ -49,19 +49,19 @@ function Map() {
         />
       ))}
 
-      {setSelectedStore && (
+      {selectedStore && (
         <InfoWindow
           onCloseClick={() => {
             setSelectedStore(null);
           }}
           position={{
-            lat: setSelectedStore.geometry.coordinates[1],
-            lng: setSelectedStore.geometry.coordinates[0],
+            lat: selectedStore.geometry.coordinates[1],
+            lng: selectedStore.geometry.coordinates[0],
           }}
         >
           <div>
-            <h2>{setSelectedStore.properties.NAME}</h2>
-            <p>{setSelectedStore.properties.ADDRESS}</p>
+            <h2>{selectedStore.properties.NAME}</h2>
+            <p>{selectedStore.properties.ADDRESS}</p>
           </div>
         </InfoWindow>
       )}

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import Mailchimp from 'react-mailchimp-form'
-import "./Css/Newsletter.css"
+import Mailchimp from "react-mailchimp-form";
+import "./Css/Newsletter.css";
+import GoogleMaps from "./GoogleMaps";
 
 const Container = styled.div`
   height: 60vh;
@@ -21,7 +22,6 @@ const Desc = styled.div`
   font-weight: 300;
   margin-bottom: 20px;
   ${mobile({ textAlign: "center" })}
-
 `;
 
 const InputContainer = styled.div`
@@ -47,42 +47,39 @@ const Button = styled.button`
   color: white;
 `;
 
-const MailchimpContainer = () =>{
-  return(
+const MailchimpContainer = () => {
+  return (
     <div>
-       <Mailchimp
-        action='https://gmail.us17.list-manage.com/subscribe/post?u=14d33edf747c62eeb135d694f&amp;id=b957a83444'
+      <Mailchimp
+        action="https://gmail.us17.list-manage.com/subscribe/post?u=14d33edf747c62eeb135d694f&amp;id=b957a83444"
         fields={[
           {
-            name: 'EMAIL',
-            placeholder: 'Email',
-            type: 'email',
-            required: true
-          }
-        ]} 
-        messages={
-                   {
-                       sending: "Sending...",
-                       success: "Thank you for subscribing!",
-                       error: "An unexpected internal error has occurred.",
-                       empty: "You must write an e-mail.",
-                       duplicate: "Too many subscribe attempts for this email address",
-                       button: "Subscribe!"
-                   }
-               } 
-        className='form'
-        />
+            name: "EMAIL",
+            placeholder: "Email",
+            type: "email",
+            required: true,
+          },
+        ]}
+        messages={{
+          sending: "Sending...",
+          success: "Thank you for subscribing!",
+          error: "An unexpected internal error has occurred.",
+          empty: "You must write an e-mail.",
+          duplicate: "Too many subscribe attempts for this email address",
+          button: "Subscribe!",
+        }}
+        className="form"
+      />
     </div>
-  )
-}
+  );
+};
 
 const Newsletter = () => {
-
   return (
     <Container>
       <Title>Newsletter</Title>
       <Desc>Get timely updates from your favorite products.</Desc>
-        <MailchimpContainer/>
+      <MailchimpContainer />
     </Container>
   );
 };
