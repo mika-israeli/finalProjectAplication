@@ -1,10 +1,10 @@
-import women from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/Zara-Floral-Print-Dress.webp";
-import jeans1 from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/jeans.jpeg";
-import jeans2 from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/jeans1.jpeg";
-import dress from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/dress.jpeg";
-import coat1 from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/zara-sale-2022-jeans.webp";
-import coat2 from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/coat.webp";
-import man from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/men.webp";
+import women from "../src/imageOfPro/Zara-Floral-Print-Dress.webp";
+import jeans1 from "../src/imageOfPro/jeans.jpeg";
+import jeans2 from "../src/imageOfPro/jeans1.jpeg";
+import dress from "../src/imageOfPro/dress.jpeg";
+import coat1 from "../src/imageOfPro/zara-sale-2022-jeans.webp";
+import coat2 from "../src/imageOfPro/coat.webp";
+import man from "../src/imageOfPro/men.webp";
 
 export const sliderItems = [
   {

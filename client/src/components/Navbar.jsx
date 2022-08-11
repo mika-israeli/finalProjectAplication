@@ -11,6 +11,15 @@ import icon from "../img/icon.jpg";
 import Sidebar from "./Sidebar";
 
 const Container = styled.div`
+background-color: #F0FFFF;
+padding: 10px;
+text-align: center;
+width: 100%;
+position: sticky;
+top: 0px;
+overflow: hidden;
+z-index: 3;
+
   height: 60px;
   ${mobile({ height: "50px" })}
 `;
