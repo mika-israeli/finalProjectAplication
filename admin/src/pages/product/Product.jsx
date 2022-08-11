@@ -3,9 +3,9 @@ import "./product.css";
 import Chart from "../../components/chart/Chart";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import { userRequest } from "../../requestMethods";
+import { axios } from "axios";
 import { updateProduct } from "../../redux/apiCalls";
-
+import {store} from "../../redux/store"
 export default function Product() {
   const location = useLocation();
   const history = useHistory();
@@ -38,7 +38,7 @@ export default function Product() {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await userRequest.get("orders/income?pid=" + productId);
+        const res = await axios.get("http://localhost:3030/api/orders/income?pid=" + productId,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
         const list = res.data.sort((a,b)=>{
             return a._id - b._id
         })
@@ -66,7 +66,7 @@ export default function Product() {
       <div className="productTitleContainer">
         <h1 className="productTitle">Product</h1>
         <Link to="/newproduct">
-          <button className="productAddButton">Create</button>
+          <button className="productAddButton">Create New</button>
         </Link>
       </div>
       <div className="productTop">

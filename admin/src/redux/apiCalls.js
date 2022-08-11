@@ -1,5 +1,4 @@
 import { loginFailure, loginStart, loginSuccess,logout } from "./userRedux";
-import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProductFailure,
   getProductStart,
@@ -55,6 +54,15 @@ export const getUsers = async () => {
   
 }
 
+export const getFiveNewUsers = async () => {
+  try {
+    const res = await axios.get(BASE_URL+"users/?new=true",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    return res.data
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export const getUserByID = async (id) => {
   try {
     const res = await axios.get(BASE_URL+"users/find/"+id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
@@ -78,6 +86,15 @@ export const deleteUser = async (userid)=> {
     await axios.delete(BASE_URL+"users/"+userid,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
   } catch (error) {
     console.log(error);
+  }
+}
+
+export const getUserStats = async () => {
+  try {
+    const res = await axios.get("http://localhost:3030/api/users/stats",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    return res.data
+  } catch (err) {
+    console.log(err);
   }
 }
 
@@ -117,10 +134,67 @@ export const updateProduct = async (id, product, dispatch) => {
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
-    const res = await axios.post(+`products`, product,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    const res = await axios.post(BASE_URL+`products`, product,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
     console.log(res.data);
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());
   }
 };
+
+
+/*----------------------- orders api ------------------------*/
+
+export const getOrders = async () => {
+  try {
+    const res = await axios.get(BASE_URL+"orders",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    return(res.data);
+  } catch {}
+};
+
+export const deleteOrder = async(id)=> {
+  try {
+    await axios.delete(BASE_URL+"orders"+id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
+  } catch (err) {
+    console.log(err);
+  }
+} 
+
+export const getOrderByUserId = async(id) => {
+  try {
+    const res = await axios.get(BASE_URL+"orders/find/"+id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
+    console.log(res.data);
+    return res.data
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getOrderByOrderId = async(id) => {
+  try {
+    const res = await axios.get(BASE_URL+"orders/findorder/"+id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
+    console.log(res.data);
+    return res.data
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const updateOrder = async (id,order) => {
+  try {
+    await axios.put(BASE_URL+"orders/"+id,order,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getFiveNewOrders = async () => {
+  try {
+    const res = await axios.get(BASE_URL+"orders/stats",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    console.log(res.data);
+    return res.data
+  } catch (err) {
+    console.log(err);
+  }
+}
+

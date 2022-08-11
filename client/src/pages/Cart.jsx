@@ -1,16 +1,18 @@
+import { useEffect, useState } from "react";
 import { Add, Remove } from "@material-ui/icons";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import StripeCheckout from "react-stripe-checkout";
-import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { removeProduct,addProductCartPage } from "../redux/cartRedux";
+import { removeProduct, addProductCartPage } from "../redux/cartRedux";
 import { clearCartData } from "../redux/apiCalls";
+import  {Popup} from "reactjs-popup"
+import "../components/Css/popupcart.css"
 const axios = require("axios")
 
 
@@ -171,9 +173,11 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
+  const [sugProducts, setSugProducts] = useState([]);
   const history = useHistory();
-  const quantity = useSelector(state=>state.cart.quantity)
+  const quantity = useSelector(state => state.cart.quantity)
   const dispatch = useDispatch();
+
   //let [bagSize,setBagSize] = useState(0);
 
   const onToken = (token) => {
@@ -183,25 +187,65 @@ const Cart = () => {
   /*const onSize = (sum) => {
     setBagSize(sum);
   }*/
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+          /*cart.products.forEach(prod=> {
+            prod.categories.forEach(async (element) => {
+              let res = await axios.get(`http://localhost:3030/api/products?category=`+element);
+              let temp = res.data.filter((prod)=>{return !cart.products.find((obj)=>obj._id===prod._id)})
+              setSugProducts(sugProducts.concat(...sugProducts,temp))
+            });
+          })*/
+          let allCategories = []
+          let allProductIds = []
+  
+          for (let i =0 ; i< cart.products.length; i++) {
+            allCategories = allCategories.concat(cart.products[i].categories)
+            allProductIds.push(cart.products[i]._id)
+          }
+          const res = await axios.get(`http://localhost:3030/api/products`);
+          const allProducts = res.data
+          console.log(res.data);
+          let ourProducts = allProducts.filter((product) => {
+            for (let  i =0 ; i< product.categories.length; i ++) {
+              for (let j =0; j < allCategories.length; j++){
+                if (product.categories[i] == allCategories[j])
+                  return true
+              }
+            }
+            return false
+          })
+          let sProducts = ourProducts.filter((product) => (!allProductIds.includes(product._id)))
+          console.log(sProducts)
+        setSugProducts(sProducts);
+      } catch (err) 
+      {
+        console.log(err);
+      }
+    };
+    getProducts()
+  }, [])
 
   useEffect(() => {
     const makeRequest = async () => {
       try {
         const res = await axios.post("http://localhost:3030/api/checkout/payment", {
           tokenId: stripeToken.id,
-          amount: 500,
+          amount: cart.total,
         });
+        console.log(res.data);
+        console.log(res.status);
         history.push("/success", {
           stripeData: res.data,
-          products: cart });
-      } catch {}
+          products: cart
+        });
+      } catch { }
     };
-    stripeToken && makeRequest();
+    makeRequest();
   }, [stripeToken, cart.total, history]);
-  
+
   const clearHandler = () => {
-    
-    //to add mongo DB clear !
     clearCartData(dispatch)
     window.location.reload(false);
   }
@@ -209,6 +253,7 @@ const Cart = () => {
     dispatch(
       removeProduct(product)
     )
+    window.location.reload(false)
   }
   const addHandler = (product) => {
     dispatch(
@@ -218,9 +263,11 @@ const Cart = () => {
   const handleContinue = () => {
     history.push("/")
   }
-  
-
+  const findsameproduct = () => {
+    console.log(sugProducts)
+  }
   return (
+    
     <Container>
       <Navbar />
       <Announcement />
@@ -255,9 +302,9 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add onClick={()=>addHandler(product)} style={{cursor: "pointer"}}/>
+                    <Add onClick={() => addHandler(product)} style={{ cursor: "pointer" }} />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove onClick={()=>removeHandler(product)} style={{cursor: "pointer"}}/>
+                    <Remove onClick={() => removeHandler(product)} style={{ cursor: "pointer" }} />
                   </ProductAmountContainer>
                   <ProductPrice >
                     $ {product.price * product.quantity}
@@ -285,18 +332,75 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
+            {stripeToken && <span>Processing... Please Wait !</span>}
+
+            
+              <Popup
+                trigger= {<Button onClick={findsameproduct} className="button">CHECKOUT NOW</Button>}
+                modal
+                nested
+              >
+              {close => (
+              <div className="modal">
+              <button className="close" onClick={close}>
+              &times;
+              </button>
+        <div className="header"> Hold on ! don't miss out those products you might like </div>
+        <div className="content">
+          {' '}
+          {sugProducts?.map((product) => (
+              <Product key={product._id}>
+                <ProductDetail>
+                  <Link to={"/product/"+product._id}>
+                  <Image src={product.img} />
+                  </Link>
+                  <Details>
+                    <span>
+                      <b>Product:</b> {product.title}
+                    </span>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductPrice >
+                    $ {product.price}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
+          <br />
+          Just click on the item you like !
+        </div>
+        <div className="actions">
+          <Popup
+            trigger={<StripeCheckout
               name="A-TEAM Shop"
-              image="../img/car.png"
-              billingAddress
-              shippingAddress
+              zipCode={false}
+              //image={""}
               description={`Your total is $${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
               stripeKey={KEY}
-            >
-              <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
+            ><Button className="button">Continue to payment</Button></StripeCheckout>}
+            position="top center"
+            nested
+          >
+          </Popup>
+          <button
+            className="button"
+            onClick={() => {
+              console.log('modal closed ');
+              close();
+            }}
+          >
+            Close
+          </button>
+          
+        </div>
+      </div>
+    )}
+  </Popup>
+             
+            
           </Summary>
         </Bottom>
       </Wrapper>

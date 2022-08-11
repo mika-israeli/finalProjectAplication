@@ -2,16 +2,18 @@ import { useState } from "react";
 import "./newProduct.css";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import {useHistory} from "react-router-dom"
 
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
   const [cat, setCat] = useState([]);
   const dispatch = useDispatch();
-
+  const history = useHistory()
+  
   const handleClick = (e) => {
     e.preventDefault()
-    console.log(inputs);
     addProduct(inputs,dispatch);
+    history.push("/products")
   }
 
   return (

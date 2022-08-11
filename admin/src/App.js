@@ -14,7 +14,11 @@ import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
+import OrderList from "./pages/orderList/OrderList"
 import Login from "./pages/login/Login";
+import History from "./pages/history/History";
+import Contact from "./pages/contact/Contact"
+import Order from "./pages/order/Order"
 import { useSelector } from "react-redux";
 
 function App() {
@@ -26,6 +30,7 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
+        {!admin && <Redirect to="/login"/>}
         {admin && (
           <>
             <Topbar />
@@ -51,6 +56,18 @@ function App() {
               </Route>
               <Route path="/newproduct">
                 <NewProduct />
+              </Route>
+              <Route path="/orders">
+                <OrderList />
+              </Route>
+              <Route path="/order/:orderId">
+                <Order />
+              </Route>
+              <Route path="/history">
+                <History />
+              </Route>
+              <Route path="/contact">
+                <Contact />
               </Route>
             </div>
           </>

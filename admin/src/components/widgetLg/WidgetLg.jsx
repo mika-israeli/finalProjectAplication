@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { userRequest } from "../../requestMethods";
+import { getFiveNewOrders } from "../../redux/apiCalls";
 import "./widgetLg.css";
 import {format} from "timeago.js"
+
+
+
 
 export default function WidgetLg() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const getOrders = async () => {
-      try {
-        const res = await userRequest.get("orders");
-        setOrders(res.data);
-      } catch {}
-    };
-    getOrders();
+    const getOr = async()=> {
+      const res = await getFiveNewOrders();
+      console.log(res);
+      setOrders(res)
+    }
+    getOr()
   }, []);
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;

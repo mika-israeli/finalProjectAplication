@@ -137,6 +137,7 @@ const Product = () => {
       try {
         const res = await axios.get("http://localhost:3030/api/products/find/" + id);
         setProduct(res.data);
+        console.log(product);
       } catch {}
     };
     getProduct();
@@ -151,7 +152,7 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    console.log("going to addProduct !");
+    console.log({ ...product, quantity, color, size });
     dispatch(
       addProduct({ ...product, quantity, color, size })
     );

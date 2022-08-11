@@ -11,11 +11,12 @@ const router = require("express").Router();
 
 router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
-
+  console.log(req.body);
   try {
     const savedOrder = await newOrder.save();
     res.status(200).json(savedOrder);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -23,6 +24,7 @@ router.post("/", verifyToken, async (req, res) => {
 //UPDATE
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
+    console.log("in server !!!s");
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
       {
@@ -56,10 +58,21 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
+router.get("/findorder/:orderId", verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const orders = await Order.findOne({_id: req.params.orderId });
+    console.log(orders);
+    res.status(200).json(orders);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // //GET ALL
 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
+    console.log("in server");
     const orders = await Order.find();
     res.status(200).json(orders);
   } catch (err) {
@@ -99,6 +112,15 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
       },
     ]);
     res.status(200).json(income);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const users = await Order.find().sort({ _id: -1 }).limit(5)
+    res.status(200).json(users);
   } catch (err) {
     res.status(500).json(err);
   }
