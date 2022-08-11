@@ -103,9 +103,10 @@ const Slider = () => {
             </ImgContainer>
             <InfoContainer>
               <Title>{item.title}</Title>
-              {/* <Link to={`/products/${item.id}`}></Link> */}
               <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
+              <Link to={`/products/${item.link}`}>
+                <Button>SHOW NOW</Button>
+              </Link>
             </InfoContainer>
           </Slide>
         ))}

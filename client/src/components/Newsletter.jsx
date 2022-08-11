@@ -101,7 +101,7 @@ const Newsletter = () => {
     <BigContainer>
       <Container>
         <Title>KEEP IN TOUCH</Title>
-        <Desc>YOU WILL KNOE ALL THE SALES FIRST.</Desc>
+        <Desc>YOU WILL KNOW ALL THE SALES FIRST.</Desc>
         <MailchimpContainer />
       </Container>
       <GoogleContainer>

@@ -4,28 +4,32 @@ import jeans2 from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src
 import dress from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/dress.jpeg";
 import coat1 from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/zara-sale-2022-jeans.webp";
 import coat2 from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/coat.webp";
+import man from "/Users/mikaisraeli/Desktop/finalProjectAplication/client/src/imageOfPro/men.webp";
 
 export const sliderItems = [
   {
     id: 1,
-    img: dress,
-    title: "SUMMER SALE",
+    img: jeans1,
+    title: "LIGHT JEANS",
     desc: "SALE SALE SALE",
     bg: "f5fafd",
+    link: "jeans",
   },
   {
     id: 2,
     img: women,
-    title: "SUMMER SALE",
+    title: "WOMEN STYLE JUST FOR YOU",
     desc: "50% OFF!!!",
     bg: "fcf1ed",
+    link: "women",
   },
   {
     id: 3,
-    img: jeans2,
-    title: "jeans",
+    img: man,
+    title: "SAAR AND JONY COLLECTION",
     desc: "TRY IT.",
     bg: "fbf0f4",
+    link: "men",
   },
 ];
 
@@ -40,7 +44,7 @@ export const categories = [
     id: 2,
     img: coat2,
     title: "COATS LOVE",
-    cat: "coat",
+    cat: "men",
   },
   {
     id: 3,
