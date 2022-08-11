@@ -8,6 +8,7 @@ import Products from "../components/Products";
 import Slider from "../components/Slider";
 import YoutubeEmbed from "../components/Video";
 import GoogleMaps from "../components/GoogleMaps";
+import Sidebar from "../components/Sidebar";
 
 const Home = () => {
   return (
@@ -15,7 +16,6 @@ const Home = () => {
       <Announcement />
       <Navbar />
       <Slider />
-      <GoogleMaps />
       <YoutubeEmbed embedId="rokGy0huYEA" />
       <Categories />
       <Products />
