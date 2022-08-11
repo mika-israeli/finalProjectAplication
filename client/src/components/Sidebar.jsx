@@ -15,7 +15,7 @@ export default (props) => {
         jeans
       </a>
       <a className="menu-item" href="/products/coat">
-        coat
+        men
       </a>
     </Menu>
   );

@@ -18,7 +18,7 @@ const Home = () => {
       <Slider />
       <YoutubeEmbed embedId="rokGy0huYEA" />
       {/* <Categories /> */}
-      <Products />
+      {/* <Products /> */}
       <Newsletter />
       <Footer />
     </div>
