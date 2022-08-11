@@ -1,0 +1,17 @@
+
+"stores":[
+    {
+      "type":"Store",
+      "properties":{
+        "STORE_ID":1,
+        "NAME":"mika",
+        "ADDRESS":"Nahal Yavniel 14",
+
+      },
+      "geometry":{
+        "type":"point",
+        "coordinates" :[1,1]
+      }
+
+    }
+]
