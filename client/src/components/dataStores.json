@@ -40,7 +40,7 @@
       "properties": {
         "PARK_ID": 1219,
         "FACILITYID": 28001,
-        "NAME": "Bob MacQuarrie Skateboard Park (SK8 Extreme Park)",
+        "NAME": "Batel's Shop",
         "NAME_FR": "Planchodrome Bob-MacQuarrie (Parc SK8 Extreme)",
         "ADDRESS": "1490 Youville Drive",
         "ADDRESS_FR": "1490, promenade Youville",
@@ -70,7 +70,7 @@
       "properties": {
         "PARK_ID": 1157,
         "FACILITYID": 28002,
-        "NAME": "Walter Baker Skateboard Park",
+        "NAME": "COLMAN's Shop",
         "NAME_FR": "Planchodrome Walter-Baker",
         "ADDRESS": "100 Charlie Rogers Place",
         "ADDRESS_FR": "100, place Charlie Rogers",
@@ -100,7 +100,7 @@
       "properties": {
         "PARK_ID": 9,
         "FACILITYID": 28006,
-        "NAME": "Roving Skateboard Park Location",
+        "NAME": "Saar Shop",
         "NAME_FR": "Lieu de planchodrome itinérant",
         "ADDRESS": "2785 8th Line Road",
         "ADDRESS_FR": "2785, chemin 8th Line",
