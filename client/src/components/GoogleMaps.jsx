@@ -29,21 +29,21 @@ function Map() {
   return (
     <GoogleMap
       defaultZoom={10}
-      defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
+      defaultCenter={{ lat: 32.0680377939317, lng: 34.783520380548566 }}
       //   defaultOptions={{ styles: mapStyles }}
     >
       {storeData.features.map((store) => (
         <Marker
           key={store.properties.PARK_ID}
           position={{
-            lat: store.geometry.coordinates[1],
-            lng: store.geometry.coordinates[0],
+            lat: store.geometry.coordinates[0],
+            lng: store.geometry.coordinates[1],
           }}
           onClick={() => {
             setSelectedStore(store);
           }}
           icon={{
-            url: icon,
+            // url: icon,
             scaledSize: new window.google.maps.Size(25, 25),
           }}
         />
@@ -55,8 +55,8 @@ function Map() {
             setSelectedStore(null);
           }}
           position={{
-            lat: selectedStore.geometry.coordinates[1],
-            lng: selectedStore.geometry.coordinates[0],
+            lat: selectedStore.geometry.coordinates[0],
+            lng: selectedStore.geometry.coordinates[1],
           }}
         >
           <div>

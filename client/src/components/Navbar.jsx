@@ -11,6 +11,15 @@ import icon from "../img/icon.jpg";
 import Sidebar from "./Sidebar";
 
 const Container = styled.div`
+  background-color: #f0ffff;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  position: sticky;
+  top: 0px;
+  overflow: hidden;
+  z-index: 3;
+
   height: 60px;
   ${mobile({ height: "50px" })}
 `;
@@ -79,6 +88,7 @@ const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
