@@ -3,15 +3,17 @@ import "./product.css";
 import Chart from "../../components/chart/Chart";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import { axios } from "axios";
-import { updateProduct } from "../../redux/apiCalls";
-import {store} from "../../redux/store"
+import { getSalesPerformance, updateProduct,getAllTimeSales } from "../../redux/apiCalls";
+import { isTabKey } from "@material-ui/data-grid";
 export default function Product() {
   const location = useLocation();
   const history = useHistory();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
+  const [alltime,setAlltime] = useState([])
   const [updated,setUpdated] = useState({})
+
+
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
@@ -37,23 +39,25 @@ export default function Product() {
 
   useEffect(() => {
     const getStats = async () => {
-      try {
-        const res = await axios.get("http://localhost:3030/api/orders/income?pid=" + productId,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
-        const list = res.data.sort((a,b)=>{
-            return a._id - b._id
-        })
+        const list = await getSalesPerformance(productId);
         list.map((item) =>
           setPStats((prev) => [
             ...prev,
             { name: MONTHS[item._id - 1], Sales: item.total },
           ])
         );
-      } catch (err) {
-        console.log(err);
-      }
     };
     getStats();
   }, [productId, MONTHS]);
+
+  useEffect(() => {
+    const getAlltime = async () => {
+        const res = await getAllTimeSales(productId);
+        setAlltime(res[0]?.total)
+    };
+    console.log(product);
+    getAlltime();
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -71,7 +75,7 @@ export default function Product() {
       </div>
       <div className="productTop">
         <div className="productTopLeft">
-          <Chart data={pStats} dataKey="Sales" title="Sales Performance" />
+          <Chart data={pStats} dataKey="Sales" title="Monthly Sales Performance" />
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">
@@ -84,12 +88,12 @@ export default function Product() {
               <span className="productInfoValue">{product._id}</span>
             </div>
             <div className="productInfoItem">
-              <span className="productInfoKey">sales:</span>
-              <span className="productInfoValue">5123</span>
+              <span className="productInfoKey">total sales:</span>
+              <span className="productInfoValue">{alltime ? alltime : "Not Sold Yet..."}</span>
             </div>
             <div className="productInfoItem">
               <span className="productInfoKey">in stock:</span>
-              <span className="productInfoValue">{product.inStock}</span>
+              <span className="productInfoValue">{product.inStock ? "true" : "false"}</span>
             </div>
           </div>
         </div>
@@ -103,7 +107,11 @@ export default function Product() {
             <input type="text" placeholder={product.desc} onChange={(e)=>setUpdated({...product,desc: e.target.value})}/>
             <label>Price</label>
             <input type="text" placeholder={product.price} onChange={(e)=>setUpdated({...product,price: e.target.value})}/>
-            <label>In Stock</label>
+            <label>Size</label>
+            <input type="text" placeholder={product.size} onChange={(e)=>setUpdated({...product,size: e.target.value})}/>
+            <label>Color</label>
+            <input type="text" placeholder={product.color} onChange={(e)=>setUpdated({...product,color: e.target.value})}/>
+            <label>In Stock</label> 
             <select name="inStock" id="idStock">
               <option value="true" onClick={(e)=>setUpdated({...product,inStock: e.target.value})}>Yes</option>
               <option value="false" onClick={(e)=>setUpdated({...product,inStock: e.target.value})}>No</option>

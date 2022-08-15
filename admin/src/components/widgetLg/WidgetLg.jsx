@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFiveNewOrders } from "../../redux/apiCalls";
 import "./widgetLg.css";
+import { Link } from "react-router-dom";
 import {format} from "timeago.js"
 
 
@@ -17,6 +18,7 @@ export default function WidgetLg() {
     }
     getOr()
   }, []);
+  
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
   };
@@ -34,7 +36,9 @@ export default function WidgetLg() {
         {orders.map((order) => (
           <tr className="widgetLgTr" key={order._id}>
             <td className="widgetLgUser">
+            <Link to={"/user/"+order.userId} style={{"text-decoration": "none","color": "inherit"}}>
               <span className="widgetLgName">{order.userId}</span>
+              </Link>
             </td>
             <td className="widgetLgDate">{format(order.createdAt)}</td>
             <td className="widgetLgAmount">${order.amount}</td>

@@ -7,7 +7,9 @@ import { useSelector,useDispatch } from "react-redux";
 import { Link,useHistory } from "react-router-dom";
 import {logout} from "../redux/apiCalls"
 import './Css/Navbar.css'
-
+import { store } from "../redux/store";
+import io from "socket.io-client"
+const socket = io("http://localhost:3030")
 
 const Container = styled.div`
   height: 60px;
@@ -90,7 +92,8 @@ const Navbar = () => {
     history.push(caturl);
   }
 
-  const onClicklogout = () => {
+  const onClicklogout =  () => {
+    socket.emit("disconnect_user",{id: store.getState().user.currentUser._id})
     logout(dispatch,products,user._id);
     alert("logged out successfully !")
     history.push("/")

@@ -98,6 +98,15 @@ export const getUserStats = async () => {
   }
 }
 
+export const getOnline = async() => {
+  try {
+    const res = await axios.get(BASE_URL+"users/online",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}})
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 //----------------Products-api-----------------//
 
 export const getProducts = async (dispatch) => {
@@ -196,5 +205,36 @@ export const getFiveNewOrders = async () => {
   } catch (err) {
     console.log(err);
   }
+}
+
+export const getOrderStats = async () => {
+  try {
+    const res = await axios.get(BASE_URL+"orders/income",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    console.log(res.data);
+    return res.data
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const getSalesPerformance = async (id) => {
+  try {
+    const res = await axios.get("http://localhost:3030/api/orders/income?pid=" + id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    console.log(res.data);
+    const list = res.data.sort((a,b)=>{
+        return a._id - b._id
+    })
+    return list;
+  }
+    catch (err) {console.log(err);}
+}
+
+export const getAllTimeSales = async (id) => {
+  try {
+    const res = await axios.get("http://localhost:3030/api/orders/alltime?pid=" + id,{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
+    console.log(res.data);
+    return res.data;
+  }
+    catch (err) {console.log(err);}
 }
 

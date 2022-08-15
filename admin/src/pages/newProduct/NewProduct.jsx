@@ -55,6 +55,24 @@ export default function NewProduct() {
           />
         </div>
         <div className="addProductItem">
+          <label>Size</label>
+          <input
+            name="size"
+            type="text"
+            placeholder="S,XS..."
+            onChange={(e) => setInputs({...inputs,size: e.target.value})}
+          />
+        </div>
+        <div className="addProductItem">
+          <label>color</label>
+          <input
+            name="color"
+            type="text"
+            placeholder="white,yellow..."
+            onChange={(e) => setInputs({...inputs,color: e.target.value})}
+          />
+        </div>
+        <div className="addProductItem">
           <label>Categories</label>
           <input type="text" placeholder="jeans,skirts" onChange={(e)=> {
             setCat(e.target.value.split(","))

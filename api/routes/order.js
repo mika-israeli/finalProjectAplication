@@ -80,7 +80,8 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-// GET MONTHLY INCOME
+
+// GET MONTHLY INCOME per product
 
 router.get("/income", verifyTokenAndAdmin, async (req, res) => {
   const productId = req.query.pid;
@@ -117,10 +118,71 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+//get all time sales per product
+
+router.get("/alltime", verifyTokenAndAdmin, async (req, res) => {
+  const productId = req.query.pid;
+
+
+  try {
+    const income = await Order.aggregate([
+      {
+        $match: {
+            products: { $elemMatch: { productId } },
+        },
+      },
+      {
+        $project: {
+          sales: "$amount",
+        },
+      },
+      {
+        $group: {
+          _id: req.query.pid,
+          total: { $sum: "$sales" },
+        },
+      },
+    ]);
+    console.log(income);
+    res.status(200).json(income);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+//get stats for graph
+router.get("/graph", verifyTokenAndAdmin, async (req, res) => {
+  const date = new Date();
+  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
+  try {
+    const data = await Order.aggregate([
+      { $match: { createdAt: { $gte: lastYear } } },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+          sales: "$amount"
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: "$sales" },
+        },
+      },
+    ]);
+    res.status(200).json(data)
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
   try {
-    const users = await Order.find().sort({ _id: -1 }).limit(5)
-    res.status(200).json(users);
+    const orders = await Order.find().sort({ _id: -1 }).limit(5)
+    res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err);
   }

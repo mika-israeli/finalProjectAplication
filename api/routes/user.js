@@ -96,6 +96,12 @@ router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+//GET ONLINE USERS 
+
+/*router.get("/online",verifyTokenAndAdmin,()=>{
+  return getOnline();
+})*/
+
 /*---------------------------------- Admin Mails -------------------------*/
 router.post("/email",async (req,res)=> {
   client.setConfig({
