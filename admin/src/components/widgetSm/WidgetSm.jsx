@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { getFiveNewUsers } from "../../redux/apiCalls";
 import { Link } from "react-router-dom";
 
-
 export default function WidgetSm() {
   const [users, setUsers] = useState([]);
 
@@ -15,7 +14,7 @@ export default function WidgetSm() {
     };
     getUsers();
   }, []);
-  
+
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
@@ -33,11 +32,11 @@ export default function WidgetSm() {
             <div className="widgetSmUser">
               <span className="widgetSmUsername">{user.username}</span>
             </div>
-            <Link to={"/user/"+user._id}>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
+            <Link to={"/user/" + user._id} className="widgetSmLink">
+              <button className="widgetSmButton">
+                <Visibility className="widgetSmIcon" />
+                Display
+              </button>
             </Link>
           </li>
         ))}

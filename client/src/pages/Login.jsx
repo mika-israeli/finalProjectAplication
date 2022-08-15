@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { store } from "../redux/store";
+import io from "socket.io-client";
+const socket = io("http://localhost:3030");
 
 const Container = styled.div`
   width: 100vw;
@@ -69,9 +71,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-  const handleClick = async(e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    await login(dispatch, { username, password });
+    socket.emit("display_user", { id: store.getState().user.currentUser?._id });
   };
   return (
     <Container>
@@ -90,9 +93,32 @@ const Login = () => {
           <Button onClick={handleClick} disabled={isFetching}>
             LOGIN
           </Button>
-          {store.getState().user.error ? <Error>Wrong Credentials</Error> : <span></span>}
-          <Link style={{"margin": "5px 0px","font-size": "12px","text-decoration": "underline", "cursor": "pointer"}}>DO NOT YOU REMEMBER THE PASSWORD?</Link> 
-          <Link to="/register" style={{"margin": "5px 0px","font-size": "12px","text-decoration": "underline", "cursor": "pointer"}}>CREATE A NEW ACCOUNT</Link>
+          {store.getState().user.error ? (
+            <Error>Wrong Credentials</Error>
+          ) : (
+            <span></span>
+          )}
+          <Link
+            style={{
+              margin: "5px 0px",
+              "font-size": "12px",
+              "text-decoration": "underline",
+              cursor: "pointer",
+            }}
+          >
+            DO NOT YOU REMEMBER THE PASSWORD?
+          </Link>
+          <Link
+            to="/register"
+            style={{
+              margin: "5px 0px",
+              "font-size": "12px",
+              "text-decoration": "underline",
+              cursor: "pointer",
+            }}
+          >
+            CREATE A NEW ACCOUNT
+          </Link>
         </Form>
       </Wrapper>
     </Container>
