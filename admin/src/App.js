@@ -17,7 +17,11 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import OrderList from "./pages/orderList/OrderList"
 import Login from "./pages/login/Login";
 import History from "./pages/history/History";
+import Contact from "./pages/contact/Contact"
+import Order from "./pages/order/Order"
+import Analytics from "./pages/analytics/Analytics"
 import { useSelector } from "react-redux";
+import Sales from "./pages/sales/Sales";
 
 function App() {
   const admin = useSelector((state) => state.user.currentUser?.isAdmin);
@@ -28,6 +32,7 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
+        {!admin && <Redirect to="/login"/>}
         {admin && (
           <>
             <Topbar />
@@ -57,8 +62,20 @@ function App() {
               <Route path="/orders">
                 <OrderList />
               </Route>
+              <Route path="/order/:orderId">
+                <Order />
+              </Route>
               <Route path="/history">
                 <History />
+              </Route>
+              <Route path="/contact">
+                <Contact />
+              </Route>
+              <Route path="/sales">
+                <Sales />
+              </Route>
+              <Route path="/analytics">
+                <Analytics />
               </Route>
             </div>
           </>

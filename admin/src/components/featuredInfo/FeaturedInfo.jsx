@@ -1,19 +1,24 @@
 import "./featuredInfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import axios from "axios"
-import {store} from "../../redux/store"
+import axios from "axios";
+import { store } from "../../redux/store";
 
 export default function FeaturedInfo() {
   const [income, setIncome] = useState([]);
   const [perc, setPerc] = useState(0);
-  const BASE_URL = "http://localhost:3030/api/"
-  
+  const BASE_URL = "http://localhost:3030/api/";
+
   useEffect(() => {
     const getIncome = async () => {
       try {
-        const res = await axios.get(BASE_URL+"orders/income",{headers: {token: `Bearer ${store.getState().user.currentUser.accessToken}`}});
-        setIncome(res.data);
+        const res = await axios.get(BASE_URL + "orders/income", {
+          headers: {
+            token: `Bearer ${store.getState().user.currentUser.accessToken}`,
+          },
+        });
+        console.log(res.data);
+        setIncome(res.data[0]);
         setPerc((res.data[1].total * 100) / res.data[0].total - 100);
       } catch {}
     };
@@ -25,7 +30,7 @@ export default function FeaturedInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Revanue</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">${income[1]?.total}</span>
+          <span className="featuredMoney">${income?.total}</span>
           <span className="featuredMoneyRate">
             %{Math.floor(perc)}{" "}
             {perc < 0 ? (

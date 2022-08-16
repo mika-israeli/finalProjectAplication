@@ -6,6 +6,10 @@
     margin-right: 20px;
 }
 
+.widgetSmLink{
+    text-decoration: none; 
+}
+
 .widgetSmTitle{
     font-size: 22px;
     font-weight: 600;

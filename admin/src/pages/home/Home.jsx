@@ -32,20 +32,18 @@ export default function Home() {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await getUserStats()
+        const res = await getUserStats();
         res.map((item) =>
           setUserStats((prev) => [
             ...prev,
-            { name: MONTHS[item._id - 1], "Active User": item.total }
-          ]));
+            { name: MONTHS[item._id - 1], "Active User": item.total },
+          ])
+        );
       } catch {}
     };
     getStats();
   }, [MONTHS]);
 
-
-  
-  
   return (
     <div className="home">
       <FeaturedInfo />

@@ -4,7 +4,6 @@ import { popularProducts } from "../data";
 import Product from "./Product";
 import axios from "axios";
 
-
 const Container = styled.div`
   padding: 20px;
   display: flex;
@@ -23,9 +22,9 @@ const Products = ({ cat, filters, sort }) => {
           cat
             ? `http://localhost:3030/api/products?category=${cat}`
             : "http://localhost:3030/api/products"
-            
-            // ? `http://localhost:PORT${process.env.PORT}/api/products?category=${cat}`
-            // : `http://localhost:${process.env.PORT}/api/products`
+
+          // ? `http://localhost:PORT${process.env.PORT}/api/products?category=${cat}`
+          // : `http://localhost:${process.env.PORT}/api/products`
         );
         console.log(res);
         setProducts(res.data);
@@ -70,10 +69,10 @@ const Products = ({ cat, filters, sort }) => {
   //           .map((item) => <Product item={item} key={item.id} />)}
   //   </Container>
   // );
-  
-    return (
+
+  return (
     <Container>
-       {cat
+      {cat
         ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : products
             .slice(0, 8)
@@ -83,9 +82,6 @@ const Products = ({ cat, filters, sort }) => {
 };
 
 export default Products;
-
-
-
 
 // JONY Test --------------------------------------------------
 
@@ -107,7 +103,7 @@ export default Products;
 
 //     const [products, setProducts] = useState([]);
 //   const [filteredProducts, setFilteredProducts] = useState([]);
-  
+
 //   useEffect(() => {
 //     const getProducts = async () => {
 //       try {
@@ -133,7 +129,6 @@ export default Products;
 //       );
 //   },[products,cat,filters]);
 
-
 //   return (
 //     <Container>
 //       {filteredProducts.map((item) => (
@@ -144,4 +139,3 @@ export default Products;
 // };
 
 // export default Products;
-

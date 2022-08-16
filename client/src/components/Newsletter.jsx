@@ -1,7 +1,29 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import Mailchimp from 'react-mailchimp-form'
-import "./Css/Newsletter.css"
+import Mailchimp from "react-mailchimp-form";
+import "./Css/Newsletter.css";
+import GoogleMaps from "./GoogleMaps";
+
+const BigContainer = styled.div`
+  display: flex;
+  background-color: #fcf5f5;
+`;
+
+const GoogleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  padding: 20px;
+  ${mobile({ height: "50vh" })}
+  margin-left: 400px;
+  margin-top: 90px;
+`;
+
+const GoogleTitle = styled.h3`
+  font-size: 30px;
+  margin-bottom: 20px;
+`;
 
 const Container = styled.div`
   height: 60vh;
@@ -10,6 +32,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-left: 70px;
 `;
 const Title = styled.h1`
   font-size: 70px;
@@ -21,7 +44,6 @@ const Desc = styled.div`
   font-weight: 300;
   margin-bottom: 20px;
   ${mobile({ textAlign: "center" })}
-
 `;
 
 const InputContainer = styled.div`
@@ -47,43 +69,46 @@ const Button = styled.button`
   color: white;
 `;
 
-const MailchimpContainer = () =>{
-  return(
+const MailchimpContainer = () => {
+  return (
     <div>
-       <Mailchimp
-        action='https://gmail.us17.list-manage.com/subscribe/post?u=14d33edf747c62eeb135d694f&amp;id=b957a83444'
+      <Mailchimp
+        action="https://gmail.us17.list-manage.com/subscribe/post?u=14d33edf747c62eeb135d694f&amp;id=b957a83444"
         fields={[
           {
-            name: 'EMAIL',
-            placeholder: 'Email',
-            type: 'email',
-            required: true
-          }
-        ]} 
-        messages={
-                   {
-                       sending: "Sending...",
-                       success: "Thank you for subscribing!",
-                       error: "An unexpected internal error has occurred.",
-                       empty: "You must write an e-mail.",
-                       duplicate: "Too many subscribe attempts for this email address",
-                       button: "Subscribe!"
-                   }
-               } 
-        className='form'
-        />
+            name: "EMAIL",
+            placeholder: "Email",
+            type: "email",
+            required: true,
+          },
+        ]}
+        messages={{
+          sending: "Sending...",
+          success: "Thank you for subscribing!",
+          error: "An unexpected internal error has occurred.",
+          empty: "You must write an e-mail.",
+          duplicate: "Too many subscribe attempts for this email address",
+          button: "Subscribe!",
+        }}
+        className="form"
+      />
     </div>
-  )
-}
+  );
+};
 
 const Newsletter = () => {
-
   return (
-    <Container>
-      <Title>Newsletter</Title>
-      <Desc>Get timely updates from your favorite products.</Desc>
-        <MailchimpContainer/>
-    </Container>
+    <BigContainer>
+      <Container>
+        <Title>KEEP IN TOUCH</Title>
+        <Desc>YOU WILL KNOW ALL THE SALES FIRST.</Desc>
+        <MailchimpContainer />
+      </Container>
+      <GoogleContainer>
+        <GoogleTitle>Find us on Google Maps</GoogleTitle>
+        <GoogleMaps />
+      </GoogleContainer>
+    </BigContainer>
   );
 };
 

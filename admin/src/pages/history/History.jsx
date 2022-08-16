@@ -1,36 +1,29 @@
 import "./history.css";
 import { DataGrid } from "@material-ui/data-grid";
 import React from "react";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { getOrders } from "../../redux/apiCalls";
+import { Link } from "react-router-dom";
 
 export default function History() {
+  const [orders, setOrders] = useState([]);
 
-    
-    const [orders,setOrders] = useState([]);
-   
-
-    useEffect(()=>{
-        const getOr = async() => {
-            const res = await getOrders();
-            const data = res.filter((ord)=>ord.status === "arrived")
-            setOrders(data);
-        }
-        getOr()
-    },[])
+  useEffect(() => {
+    const getOr = async () => {
+      const res = await getOrders();
+      const data = res.filter((ord) => ord.status === "Completed");
+      setOrders(data);
+    };
+    getOr();
+  }, []);
 
   const columns = [
-    
     {
       field: "order",
       headerName: "Order No.",
       width: 200,
       renderCell: (params) => {
-        return (
-          <div className="orderListItem">
-            {params.row._id}
-          </div>
-        );
+        return <div className="orderListItem">{params.row._id}</div>;
       },
     },
     { field: "userId", headerName: "User ID", width: 220 },
@@ -43,6 +36,18 @@ export default function History() {
       field: "status",
       headerName: "Status",
       width: 150,
+    },
+    {
+      field: "info",
+      headerName: "Info",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <Link to={"/order/" + params.row._id}>
+            <button className="userListEdit">Etc...</button>
+          </Link>
+        );
+      },
     },
   ];
 

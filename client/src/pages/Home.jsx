@@ -6,6 +6,9 @@ import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
+import YoutubeEmbed from "../components/Video";
+import GoogleMaps from "../components/GoogleMaps";
+import Sidebar from "../components/Sidebar";
 
 const Home = () => {
   return (
@@ -13,10 +16,11 @@ const Home = () => {
       <Announcement />
       <Navbar />
       <Slider />
-      <Categories />
-      <Products/>
-      <Newsletter/>
-      <Footer/>
+      <YoutubeEmbed embedId="rokGy0huYEA" />
+      {/* <Categories /> */}
+      {/* <Products /> */}
+      <Newsletter />
+      <Footer />
     </div>
   );
 };
