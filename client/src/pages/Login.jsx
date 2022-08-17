@@ -74,7 +74,7 @@ const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     await login(dispatch, { username, password });
-    socket.emit("display_user", { id: store.getState().user.currentUser?._id });
+    socket.emit("display_user", store.getState().user?.currentUser);
   };
   return (
     <Container>
