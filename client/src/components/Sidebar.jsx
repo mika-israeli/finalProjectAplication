@@ -14,7 +14,7 @@ export default (props) => {
       <a className="menu-item" href="/products/jeans">
         jeans
       </a>
-      <a className="menu-item" href="/products/coat">
+      <a className="menu-item" href="/products/man">
         men
       </a>
     </Menu>
