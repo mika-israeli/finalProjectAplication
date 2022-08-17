@@ -9,6 +9,8 @@ import { logout } from "../redux/apiCalls";
 import "./Css/Navbar.css";
 import icon from "../img/icon.jpg";
 import Sidebar from "./Sidebar";
+import io from "socket.io-client";
+const socket = io("http://localhost:3030");
 
 const Container = styled.div`
   background-color: #f0ffff;

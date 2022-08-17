@@ -23,8 +23,8 @@ let onlineUsers =[];
   return onlineUsers
 }*/
 
-const addNewUser = (username,socketId) => {
-  !onlineUsers.some((user)=>user.username === username) && onlineUsers.push({username,socketId})
+const addNewUser = (user) => {
+  !onlineUsers.some((user)=>user === user) && onlineUsers.push(user)
 }
 const removeUser = (socketId) => {
   onlineUsers = onlineUsers.filter((user)=>user.socketId !== socketId)
@@ -32,12 +32,16 @@ const removeUser = (socketId) => {
 
 io.on("connection",(socket)=> {
   socket.on("display_user",(data)=> {
-    console.log("User "+data.id+" is connected !" + socket.id)
-    addNewUser(data.id,socket.id)
+    console.log("User "+data+" is connected !" + socket.id)
+    addNewUser(data)
   })
   socket.on("disconnect_user",(data)=> {
     console.log("User "+data.id+" is disconnected !");
     removeUser(socket.id)
+  })
+
+  socket.on("admin_conn",()=>{
+    io.emit("admin_get",onlineUsers)
   })
 })
 

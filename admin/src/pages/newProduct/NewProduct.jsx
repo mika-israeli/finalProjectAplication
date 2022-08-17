@@ -6,12 +6,12 @@ import { useHistory } from "react-router-dom";
 
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
-  const [cat, setCat] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleClick = (e) => {
     e.preventDefault();
+    console.log(inputs);
     addProduct(inputs, dispatch);
     history.push("/products");
   };
@@ -55,33 +55,98 @@ export default function NewProduct() {
           />
         </div>
         <div className="addProductItem">
-          <label>Size</label>
-          <input
-            name="size"
-            type="text"
-            placeholder="S,XS..."
-            onChange={(e) => setInputs({ ...inputs, size: e.target.value })}
-          />
+        <label>Size</label>
+            <span>XS  &ensp;
+            <input
+              type="checkbox"
+              placeholder="XS"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,size: inputs.size ? [...inputs.size,e.target.placeholder]: [e.target.placeholder]}) : setInputs({...inputs,size: inputs.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />&emsp;S&ensp;
+            <input
+              type="checkbox"
+              placeholder="S"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,size: inputs.size ? [...inputs.size,e.target.placeholder]: [e.target.placeholder]}) : setInputs({...inputs,size: inputs.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;M&ensp;
+            <input
+              type="checkbox"
+              placeholder="M"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,size: inputs.size ? [...inputs.size,e.target.placeholder]: [e.target.placeholder]}) : setInputs({...inputs,size: inputs.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;L&ensp;
+            <input
+              type="checkbox"
+              placeholder="L"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,size: inputs.size ? [...inputs.size,e.target.placeholder]: [e.target.placeholder]}) : setInputs({...inputs,size: inputs.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;XL&ensp;
+            <input
+              type="checkbox"
+              placeholder="XL"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,size: inputs.size ? [...inputs.size,e.target.placeholder]: [e.target.placeholder]}) : setInputs({...inputs,size: inputs.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            </span>
         </div>
         <div className="addProductItem">
-          <label>color</label>
-          <input
-            name="color"
-            type="text"
-            placeholder="white,yellow..."
-            onChange={(e) => setInputs({ ...inputs, color: e.target.value })}
-          />
+        <label>Categories</label>
+            <span>Men  &ensp;
+            <input
+              type="checkbox"
+              placeholder="men"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,categories: inputs.categories ? [...inputs.categories,e.target.placeholder]: [e.target.placeholder]}) : setInputs({...inputs,categories: inputs.categories.filter((obj)=>obj !== e.target.placeholder)})}
+            />&emsp;Jeans&ensp;
+            <input
+              type="checkbox"
+              placeholder="jeans"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,categories: inputs.categories ? [...inputs.categories,e.target.placeholder]: [e.target.placeholder]}) : setInputs({...inputs,categories: inputs.categories.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Women&ensp;
+            <input
+              type="checkbox"
+              placeholder="women"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,categories: inputs.categories ? [...inputs.categories,e.target.placeholder]: [e.target.placeholder]}) : setInputs({...inputs,categories: inputs.categories.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            
+            </span>
         </div>
         <div className="addProductItem">
-          <label>Categories</label>
-          <input
-            type="text"
-            placeholder="jeans,skirts"
-            onChange={(e) => {
-              setCat(e.target.value.split(","));
-              setInputs({ ...inputs, categories: cat });
-            }}
-          />
+        <label>Color</label>
+            <span>White  &ensp;
+            <input
+              type="checkbox"
+              placeholder="white"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,color: inputs.color ? [...inputs.color,e.target.placeholder] : [e.target.placeholder]}) : setInputs({...inputs,color: inputs.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />&emsp;Black&ensp;
+            <input
+              type="checkbox"
+              placeholder="black"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,color: inputs.color ? [...inputs.color,e.target.placeholder] : [e.target.placeholder]}) : setInputs({...inputs,color: inputs.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Red&ensp;
+            <input
+              type="checkbox"
+              placeholder="red"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,color: inputs.color ? [...inputs.color,e.target.placeholder] : [e.target.placeholder]}) : setInputs({...inputs,color: inputs.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Blue&ensp;
+            <input
+              type="checkbox"
+              placeholder="blue"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,color: inputs.color ? [...inputs.color,e.target.placeholder] : [e.target.placeholder]}) : setInputs({...inputs,color: inputs.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Yellow&ensp;
+            <input
+              type="checkbox"
+              placeholder="yellow"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,color: inputs.color ? [...inputs.color,e.target.placeholder] : [e.target.placeholder]}) : setInputs({...inputs,color: inputs.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Green&ensp;
+            <input
+              type="checkbox"
+              placeholder="green"
+              onChange={(e) => e.target.checked ? setInputs({...inputs,color: inputs.color ? [...inputs.color,e.target.placeholder] : [e.target.placeholder]}) : setInputs({...inputs,color: inputs.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            </span>
         </div>
         <div className="addProductItem">
           <label>Stock</label>

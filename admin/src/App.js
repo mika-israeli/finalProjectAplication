@@ -18,13 +18,9 @@ import OrderList from "./pages/orderList/OrderList";
 import Login from "./pages/login/Login";
 import History from "./pages/history/History";
 import { useSelector } from "react-redux";
-import OrderList from "./pages/orderList/OrderList"
-import Login from "./pages/login/Login";
-import History from "./pages/history/History";
 import Contact from "./pages/contact/Contact"
 import Order from "./pages/order/Order"
 import Analytics from "./pages/analytics/Analytics"
-import { useSelector } from "react-redux";
 import Sales from "./pages/sales/Sales";
 
 function App() {

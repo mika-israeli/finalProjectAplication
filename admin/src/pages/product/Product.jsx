@@ -8,20 +8,19 @@ import {
   updateProduct,
   getAllTimeSales,
 } from "../../redux/apiCalls";
-import { isTabKey } from "@material-ui/data-grid";
 export default function Product() {
   const location = useLocation();
   const history = useHistory();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
   const [alltime, setAlltime] = useState([]);
-  const [updated, setUpdated] = useState({});
-
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
+  const [updated, setUpdated] = useState({_id: product._id});
   const dispatch = useDispatch();
-
+  const [sizetoupdated,setSizetoupdated] = useState([]);
+  const [colors,setColors] = useState([]);
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -63,8 +62,8 @@ export default function Product() {
   }, []);
 
   const handleClick = (e) => {
-    e.preventDefault();
-    updateProduct(product._id, updated, dispatch);
+    e.preventDefault(); 
+    updateProduct(product._id, updated, dispatch)
     history.push("/products");
   };
 
@@ -117,43 +116,119 @@ export default function Product() {
               type="text"
               placeholder={product.title}
               onChange={(e) =>
-                setUpdated({ ...product, title: e.target.value })
+                setUpdated({ ...updated, title: e.target.value })
               }
             />
             <label>Product Description</label>
             <input
               type="text"
               placeholder={product.desc}
-              onChange={(e) => setUpdated({ ...product, desc: e.target.value })}
+              onChange={(e) => setUpdated({ ...updated, desc: e.target.value })}
             />
             <label>Price</label>
             <input
               type="text"
               placeholder={product.price}
               onChange={(e) =>
-                setUpdated({ ...product, price: e.target.value })
+                setUpdated({ ...updated, price: e.target.value })
               }
             />
             <label>Size</label>
+            <span>XS  &ensp;
             <input
-              type="text"
-              placeholder={product.size}
-              onChange={(e) => setUpdated({ ...product, size: e.target.value })}
+              type="checkbox"
+              placeholder="XS"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />&emsp;S&ensp;
+            <input
+              type="checkbox"
+              placeholder="S"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
             />
+            &emsp;M&ensp;
+            <input
+              type="checkbox"
+              placeholder="M"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;L&ensp;
+            <input
+              type="checkbox"
+              placeholder="L"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;XL&ensp;
+            <input
+              type="checkbox"
+              placeholder="XL"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            <div>&emsp; current sizes: &ensp; {product.size.map((obj)=> (<h6>{obj}</h6>))}</div>
+            </span>
             <label>Color</label>
+            <span>White  &ensp;
             <input
-              type="text"
-              placeholder={product.color}
-              onChange={(e) =>
-                setUpdated({ ...product, color: e.target.value })
-              }
+              type="checkbox"
+              placeholder="white"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />&emsp;Black&ensp;
+            <input
+              type="checkbox"
+              placeholder="black"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
             />
+            &emsp;Red&ensp;
+            <input
+              type="checkbox"
+              placeholder="red"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Blue&ensp;
+            <input
+              type="checkbox"
+              placeholder="blue"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Yellow&ensp;
+            <input
+              type="checkbox"
+              placeholder="yellow"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Green&ensp;
+            <input
+              type="checkbox"
+              placeholder="green"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            <div>&emsp; current colors: &ensp; {product.color.map((obj)=> (<h6>{obj}</h6>))}</div>
+            </span>
+            <label>Categories</label>
+            <span>Men  &ensp;
+            <input
+              type="checkbox"
+              placeholder="men"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,categories: updated.categories ? [...updated.categories,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,categories: updated.categories.filter((obj)=>obj !== e.target.placeholder)})}
+            />&emsp;Jeans&ensp;
+            <input
+              type="checkbox"
+              placeholder="jeans"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,categories: updated.categories ? [...updated.categories,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,categories: updated.categories.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            &emsp;Women&ensp;
+            <input
+              type="checkbox"
+              placeholder="women"
+              onChange={(e) => e.target.checked ? setUpdated({...updated,categories: updated.categories ? [...updated.categories,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,categories: updated.categories.filter((obj)=>obj !== e.target.placeholder)})}
+            />
+            <div>&emsp; current categories: &ensp; {product.categories.map((obj)=> (<h6>{obj}</h6>))}</div>
+            </span>
             <label>In Stock</label>
             <select name="inStock" id="idStock">
               <option
                 value="true"
                 onClick={(e) =>
-                  setUpdated({ ...product, inStock: e.target.value })
+                  setUpdated({ ...updated, inStock: e.target.value })
                 }
               >
                 Yes
@@ -161,7 +236,7 @@ export default function Product() {
               <option
                 value="false"
                 onClick={(e) =>
-                  setUpdated({ ...product, inStock: e.target.value })
+                  setUpdated({ ...updated, inStock: e.target.value })
                 }
               >
                 No
