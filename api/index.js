@@ -9,41 +9,34 @@ const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
+const wishlistRoute = require("./routes/wishlist")
 const cors = require("cors");
-const { createServer } = require("http");
+const http = require("http");
 const { Server } = require("socket.io");
+app.use(cors());
 
+const server = http.createServer(app);
 
-const httpServer = createServer(app);
-const io = new Server(httpServer, { cors: {origin: "*",credentials: true} });
+//const { createServer } = require("http");
+// const { Server } = require("socket.io");
 
-let onlineUsers =[];
+//const httpServer = createServer(app);
+// const io = new Server(httpServer, { cors: { origin: "*", credentials: true } });
 
-/*export const getOnline= () => {
-  return onlineUsers
-}*/
+// io.on("connection", (socket) => {
+//   socket.on("display_user", (data) => {
+//     console.log("User " + data + " is connected !" + socket.id);
+//     addNewUser(data);
+//   });
+//   socket.on("disconnect_user", (data) => {
+//     console.log("User " + data.id + " is disconnected !");
+//     removeUser(socket.id);
+//   });
 
-const addNewUser = (user) => {
-  !onlineUsers.some((user)=>user === user) && onlineUsers.push(user)
-}
-const removeUser = (socketId) => {
-  onlineUsers = onlineUsers.filter((user)=>user.socketId !== socketId)
-}
-
-io.on("connection",(socket)=> {
-  socket.on("display_user",(data)=> {
-    console.log("User "+data+" is connected !" + socket.id)
-    addNewUser(data)
-  })
-  socket.on("disconnect_user",(data)=> {
-    console.log("User "+data.id+" is disconnected !");
-    removeUser(socket.id)
-  })
-
-  socket.on("admin_conn",()=>{
-    io.emit("admin_get",onlineUsers)
-  })
-})
+//   socket.on("admin_conn", () => {
+//     io.emit("admin_get", onlineUsers);
+//   });
+// });
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -60,10 +53,45 @@ app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
+app.use("/api/wishlist",wishlistRoute)
+
+// httpServer.listen(process.env.PORT || 5000, () => {
+//   console.log(`Backend server is running on Port: ${process.env.PORT}`);
+// });
+
+/////////////////////////////////////////////////////////
+// const express = require("express");
+// const app = express();
 
 
-
-httpServer.listen(process.env.PORT || 5000, () => {
-  console.log(`Backend server is running on Port: ${process.env.PORT}`);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
 });
 
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+  });
+
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  });
+});
+
+/*server.listen(3001, () => {
+  console.log("SERVER RUNNING");
+});*/
+
+server.listen(process.env.PORT || 5000, () => {
+  console.log(`Backend server is running on Port: ${process.env.PORT}`);
+});

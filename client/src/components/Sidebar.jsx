@@ -17,6 +17,9 @@ export default (props) => {
       <a className="menu-item" href="/products/man">
         men
       </a>
+      <a className="menu-item" href="/chat">
+        live chat
+      </a>
     </Menu>
     /////////
   );

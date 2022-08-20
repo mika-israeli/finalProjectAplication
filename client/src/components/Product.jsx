@@ -1,10 +1,14 @@
 import {
   FavoriteBorderOutlined,
   SearchOutlined,
+  FavoriteOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { createWishlist,updateWishlist,getWishlist,deleteWishlist } from "../redux/apiCalls";
 
 const Info = styled.div`
   opacity: 0;
@@ -61,6 +65,9 @@ const Icon = styled.div`
   justify-content: center;
   margin: 10px;
   transition: all 0.5s ease;
+  border: ${(props) => props.type === "filled" && "none"};
+  
+  color: ${(props) => props.type === "filled" && "black"};
   &:hover {
     background-color: #e9f5f5;
     transform: scale(1.1);
@@ -68,22 +75,70 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
+  const [wish,setWish] = useState()
+  const [fill,setFill] = useState(false)
+
+  useEffect(()=> {
+    const getWish = async () => {
+    try {
+      const res = await getWishlist();
+      console.log(res);
+      res && setWish(res)
+      res.products.find((obj)=>obj.productId == item._id) ? setFill(true) : setFill(false)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  getWish();
+  },[])
+
+  const clickHandler = async() => {
+    
+    console.log(wish);
+    if (wish)
+    {
+      const hasproduct = wish.products.find((obj)=>obj.productId == item._id)
+      console.log(hasproduct);
+      if (!hasproduct)
+      {
+        
+        const res = await updateWishlist({ productId: item._id})
+        setWish(res)
+        console.log(res + "inserted");
+        setFill(true)
+      }
+      else
+      {
+        const res = await deleteWishlist({ productId: item._id})
+        setWish(res)
+        console.log(res+ "deleted");
+        setFill(false)
+      }
+    }
+    else {
+      setFill(true)
+      const res = await createWishlist({productId: item._id})
+      setWish(res)
+      console.log(res);
+    }
+    
+  }
   return (
     <Container>
       <Circle />
       <Image src={item.img} />
       <Info>
-        <Icon>
+        {/* <Icon>
           <ShoppingCartOutlined />
-        </Icon>
+        </Icon> */}
         <Icon>
           <Link to={`/product/${item._id}`}>
             <SearchOutlined />
           </Link>
         </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
+         <Icon onClick={clickHandler} color={"black"}>
+          {fill ? <FavoriteOutlined /> : <FavoriteBorderOutlined />}
+        </Icon> 
       </Info>
     </Container>
   );

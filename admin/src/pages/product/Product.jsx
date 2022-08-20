@@ -17,10 +17,10 @@ export default function Product() {
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
-  const [updated, setUpdated] = useState({_id: product._id});
+  const [updated, setUpdated] = useState({ _id: product._id });
   const dispatch = useDispatch();
-  const [sizetoupdated,setSizetoupdated] = useState([]);
-  const [colors,setColors] = useState([]);
+  const [sizetoupdated, setSizetoupdated] = useState([]);
+  const [colors, setColors] = useState([]);
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -62,8 +62,8 @@ export default function Product() {
   }, []);
 
   const handleClick = (e) => {
-    e.preventDefault(); 
-    updateProduct(product._id, updated, dispatch)
+    e.preventDefault();
+    updateProduct(product._id, updated, dispatch);
     history.push("/products");
   };
 
@@ -134,94 +134,311 @@ export default function Product() {
               }
             />
             <label>Size</label>
-            <span>XS  &ensp;
-            <input
-              type="checkbox"
-              placeholder="XS"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
-            />&emsp;S&ensp;
-            <input
-              type="checkbox"
-              placeholder="S"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            &emsp;M&ensp;
-            <input
-              type="checkbox"
-              placeholder="M"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            &emsp;L&ensp;
-            <input
-              type="checkbox"
-              placeholder="L"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            &emsp;XL&ensp;
-            <input
-              type="checkbox"
-              placeholder="XL"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,size: updated.size ? [...updated.size,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,size: updated.size.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            <div>&emsp; current sizes: &ensp; {product.size.map((obj)=> (<h6>{obj}</h6>))}</div>
+            <span>
+              XS &ensp;
+              <input
+                type="checkbox"
+                placeholder="XS"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        size: updated.size
+                          ? [...updated.size, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        size: updated.size.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;S&ensp;
+              <input
+                type="checkbox"
+                placeholder="S"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        size: updated.size
+                          ? [...updated.size, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        size: updated.size.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;M&ensp;
+              <input
+                type="checkbox"
+                placeholder="M"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        size: updated.size
+                          ? [...updated.size, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        size: updated.size.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;L&ensp;
+              <input
+                type="checkbox"
+                placeholder="L"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        size: updated.size
+                          ? [...updated.size, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        size: updated.size.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;XL&ensp;
+              <input
+                type="checkbox"
+                placeholder="XL"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        size: updated.size
+                          ? [...updated.size, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        size: updated.size.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              <div>
+                &emsp; <label class="current">current sizes:</label> &ensp;{" "}
+                {product.size.map((obj) => (
+                  <label class="currentItem">{obj}</label>
+                ))}
+              </div>
             </span>
             <label>Color</label>
-            <span>White  &ensp;
-            <input
-              type="checkbox"
-              placeholder="white"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
-            />&emsp;Black&ensp;
-            <input
-              type="checkbox"
-              placeholder="black"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            &emsp;Red&ensp;
-            <input
-              type="checkbox"
-              placeholder="red"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            &emsp;Blue&ensp;
-            <input
-              type="checkbox"
-              placeholder="blue"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            &emsp;Yellow&ensp;
-            <input
-              type="checkbox"
-              placeholder="yellow"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            &emsp;Green&ensp;
-            <input
-              type="checkbox"
-              placeholder="green"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,color: updated.color ? [...updated.color,e.target.placeholder] : [e.target.placeholder]}) : setUpdated({...updated,color: updated.color.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            <div>&emsp; current colors: &ensp; {product.color.map((obj)=> (<h6>{obj}</h6>))}</div>
+            <span>
+              White &ensp;
+              <input
+                type="checkbox"
+                placeholder="white"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        color: updated.color
+                          ? [...updated.color, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        color: updated.color.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;Black&ensp;
+              <input
+                type="checkbox"
+                placeholder="black"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        color: updated.color
+                          ? [...updated.color, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        color: updated.color.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;Red&ensp;
+              <input
+                type="checkbox"
+                placeholder="red"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        color: updated.color
+                          ? [...updated.color, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        color: updated.color.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;Blue&ensp;
+              <input
+                type="checkbox"
+                placeholder="blue"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        color: updated.color
+                          ? [...updated.color, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        color: updated.color.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;Yellow&ensp;
+              <input
+                type="checkbox"
+                placeholder="yellow"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        color: updated.color
+                          ? [...updated.color, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        color: updated.color.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;Green&ensp;
+              <input
+                type="checkbox"
+                placeholder="green"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        color: updated.color
+                          ? [...updated.color, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        color: updated.color.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              <div>
+                &emsp; <label class="current">current colors:</label> &ensp;{" "}
+                {product.color.map((obj) => (
+                  <label class="currentItem">{obj}</label>
+                ))}
+              </div>
             </span>
             <label>Categories</label>
-            <span>Men  &ensp;
-            <input
-              type="checkbox"
-              placeholder="men"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,categories: updated.categories ? [...updated.categories,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,categories: updated.categories.filter((obj)=>obj !== e.target.placeholder)})}
-            />&emsp;Jeans&ensp;
-            <input
-              type="checkbox"
-              placeholder="jeans"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,categories: updated.categories ? [...updated.categories,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,categories: updated.categories.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            &emsp;Women&ensp;
-            <input
-              type="checkbox"
-              placeholder="women"
-              onChange={(e) => e.target.checked ? setUpdated({...updated,categories: updated.categories ? [...updated.categories,e.target.placeholder]: [e.target.placeholder]}) : setUpdated({...updated,categories: updated.categories.filter((obj)=>obj !== e.target.placeholder)})}
-            />
-            <div>&emsp; current categories: &ensp; {product.categories.map((obj)=> (<h6>{obj}</h6>))}</div>
+            <span>
+              Men &ensp;
+              <input
+                type="checkbox"
+                placeholder="men"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        categories: updated.categories
+                          ? [...updated.categories, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        categories: updated.categories.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;Jeans&ensp;
+              <input
+                type="checkbox"
+                placeholder="jeans"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        categories: updated.categories
+                          ? [...updated.categories, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        categories: updated.categories.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              &emsp;Women&ensp;
+              <input
+                type="checkbox"
+                placeholder="women"
+                onChange={(e) =>
+                  e.target.checked
+                    ? setUpdated({
+                        ...updated,
+                        categories: updated.categories
+                          ? [...updated.categories, e.target.placeholder]
+                          : [e.target.placeholder],
+                      })
+                    : setUpdated({
+                        ...updated,
+                        categories: updated.categories.filter(
+                          (obj) => obj !== e.target.placeholder
+                        ),
+                      })
+                }
+              />
+              <div>
+                &emsp; <label class="current">current categories:</label> &ensp;{" "}
+                {product.categories.map((obj) => (
+                  <label class="currentItem">{obj}</label>
+                ))}
+              </div>
             </span>
             <label>In Stock</label>
             <select name="inStock" id="idStock">

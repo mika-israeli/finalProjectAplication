@@ -12,7 +12,6 @@ import {
   } from "@material-ui/icons";
   import { useEffect,useState } from "react";
   import { Link, useHistory, useParams } from "react-router-dom";
-  import { getUserByID,updateUser } from "../../redux/apiCalls";
   import axios from "axios"
   import "./contact.css";
   import {data} from "../../dummyData"

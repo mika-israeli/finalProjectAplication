@@ -175,3 +175,65 @@ export const getProducts = async () => {
     return res.data;
   } catch (error) {}
 };
+
+
+//----------------------------------Wishlist-api-------------------------------------------------//
+
+export const getWishlist = async () => {
+  try {
+    const res = await axios.get("http://localhost:3030/api/wishlist/find/"+store.getState().user.currentUser._id,{
+      headers: {
+        token: `Bearer ${store.getState().user.currentUser.accessToken}`,
+      },
+    });
+    return res.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const createWishlist = async (body) => {
+  try {
+    const obj = {
+      userId: store.getState().user.currentUser._id,
+      products: body
+    }
+    const res = await axios.post("http://localhost:3030/api/wishlist",obj,{
+      headers: {
+        token: `Bearer ${store.getState().user.currentUser.accessToken}`,
+      },
+    });
+    return res.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const updateWishlist = async (product) => {
+  try {
+    console.log(product);
+    const res = await axios.post("http://localhost:3030/api/wishlist/find/"+store.getState().user.currentUser._id,product,{
+      headers: {
+        token: `Bearer ${store.getState().user.currentUser.accessToken}`,
+      },
+    });
+    return res.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const deleteWishlist = async (product) => {
+  try {
+    console.log(product);
+    const res = await axios.post("http://localhost:3030/api/wishlist/delete/"+store.getState().user.currentUser._id,product,{
+      headers: {
+        token: `Bearer ${store.getState().user.currentUser.accessToken}`,
+      },
+    });
+    console.log(res.data);
+    return res.data
+  } catch (error) {
+    console.log(error);
+  }
+}

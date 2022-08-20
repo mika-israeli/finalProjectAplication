@@ -157,7 +157,8 @@ const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
 
 const Button = styled.button`
-  width: 100%;
+  width: 70%;
+  margin: 5px;
   padding: 10px;
   background-color: black;
   color: white;
@@ -270,7 +271,7 @@ const Cart = () => {
           <TopTexts>
             <TopText>Shopping Bag({quantity})</TopText>
             <TopText>
-              <Link to="./wishlist">Your Wishlist (0)</Link>
+              <Link to="./wishlist">Your Wishlist (0)</Link> 
             </TopText>
           </TopTexts>
           <TopButton onClick={clearHandler}>CLEAR CART</TopButton>
@@ -336,7 +337,7 @@ const Cart = () => {
 
             <Popup
               trigger={
-                <Button onClick={findsameproduct} className="button">
+                <Button onClick={findsameproduct} className="button" style={{"width": "100%"}}>
                   CHECKOUT NOW
                 </Button>
               }
@@ -394,15 +395,15 @@ const Cart = () => {
                       position="top center"
                       nested
                     ></Popup>
-                    <button
+                    <Button
                       className="button"
                       onClick={() => {
-                        console.log("modal closed ");
                         close();
                       }}
+                      
                     >
-                      Close
-                    </button>
+                      Not yet...
+                    </Button>
                   </div>
                 </div>
               )}

@@ -4,9 +4,10 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
-import Tracking from "./pages/Tracking"
-import Myaccount from "./pages/Myaccount"
-import Wishlist from "./pages/Wishlist"
+import Tracking from "./pages/Tracking";
+import Myaccount from "./pages/Myaccount";
+import Wishlist from "./pages/Wishlist";
+import ChatApp from "./components/ChatApp";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,15 +17,18 @@ import {
 import Success from "./pages/Success";
 import { useSelector } from "react-redux";
 
-
 const App = () => {
+
   const user = useSelector((state) => state.user.currentUser);
- 
+
   return (
     <Router>
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/chat">
+          <ChatApp />
         </Route>
         <Route path="/products/:category">
           <ProductList />
@@ -43,13 +47,13 @@ const App = () => {
           <Register />
         </Route>
         <Route path="/tracking">
-          <Tracking/>
+          <Tracking />
         </Route>
         <Route path="/wishlist">
-          <Wishlist/>
+          <Wishlist />
         </Route>
         <Route path="/myaccount">
-          <Myaccount/>
+          <Myaccount />
         </Route>
       </Switch>
     </Router>

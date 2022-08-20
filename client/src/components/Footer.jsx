@@ -1,3 +1,4 @@
+import iconStore from "../img/icon.jpg";
 import {
   Facebook,
   Instagram,
@@ -83,13 +84,26 @@ const ContactItem = styled.div`
 const Payment = styled.img`
   width: 50%;
 `;
+const Image = styled.img`
+  ${"" /* display: flex; */}
+  padding: 10px 10px;
+  margin-right: 100px;
+  ${mobile({ padding: "0px" })}
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  marginleft: 50px;
+  text-align: center;
+  ${"" /* justifycontent: center; */}
+`;
 
 const Footer = () => {
   return (
     <Container>
       <Left>
         <Logo>MMJBS dev team</Logo>
-        <Desc>In our store you can find everything you dreaned of!</Desc>
+        <Desc>In our store you can find everything you always wanted !</Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">
             <Facebook />
@@ -121,13 +135,13 @@ const Footer = () => {
             <a href="./products/women">Woman Fashion</a>
           </ListItem>
           <ListItem>
-            <a href="../myaccount">My Account</a>
+            <a href="./products/jeans">Our amazing jeans</a>
           </ListItem>
           <ListItem>
-            <a href="../tracking">Order Tracking</a>
+            <a href="./products/men">Men fashion</a>
           </ListItem>
           <ListItem>
-            <a href="../wishlist">Wishlist</a>
+            <a href="/chat">Live Chat</a>
           </ListItem>
         </List>
       </Center>
@@ -146,8 +160,10 @@ const Footer = () => {
             approjectcolman@gmail.com
           </a>
         </ContactItem>
+
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>
+      <Image src={iconStore} alt="logo" />
     </Container>
   );
 };

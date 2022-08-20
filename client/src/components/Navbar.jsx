@@ -1,6 +1,6 @@
 import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +10,8 @@ import "./Css/Navbar.css";
 import icon from "../img/icon.jpg";
 import Sidebar from "./Sidebar";
 import io from "socket.io-client";
+import axios from "axios";
+import { store } from "../redux/store";
 const socket = io("http://localhost:3030");
 
 const Container = styled.div`
@@ -99,6 +101,9 @@ const a_style = {
 };
 
 const Navbar = () => {
+  
+ 
+  const [admin,setAdmin] = useState(false)
   const dispatch = useDispatch();
   const products = useSelector((state) => state.cart.products);
   const user = useSelector((state) => state.user.currentUser);
@@ -115,6 +120,16 @@ const Navbar = () => {
     alert("logged out successfully !");
     history.push("/");
   };
+
+  useEffect(()=>{
+    const getUser = async () => {
+      const res = await axios.get("http://localhost:3030/api/users/find/"+store.getState().user?.currentUser._id);
+      console.log(res.data);
+      console.log(res.data.isAdmin);
+      setAdmin(res.data.isAdmin)
+    }
+    getUser();
+  },[])
 
   return (
     <Container>
@@ -145,6 +160,11 @@ const Navbar = () => {
           </Link>
         </Center>
         <Right>
+        {admin &&<MenuItem>
+              <a href="http://localhost:3001">
+                Admin Dashboard
+              </a>
+            </MenuItem>}
           {user ? (
             <MenuItem />
           ) : (
